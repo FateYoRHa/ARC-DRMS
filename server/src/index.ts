@@ -1,12 +1,17 @@
 import express from "express";
 import dotenv from "dotenv";
 
+import userRoutes from "./auth/users.route";
+
 dotenv.config();
 
 const app = express();
 const port = Number(process.env.PORT ?? 5000);
 
 app.use(express.json());
+
+// AUTH ROUTES
+app.use("/users", userRoutes);
 
 app.get("/", (_req, res) => {
   res.json({ message: "ARC-DRMS server is running" });
