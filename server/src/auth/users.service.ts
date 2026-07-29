@@ -17,6 +17,5 @@ export async function registerUserService(
     error.status = 409;
     throw error;
   }
-  const user = await db.insert(users).values({ name, email, password });
-  return user;
+  return await db.insert(users).values({ name, email, password }).returning();
 }
