@@ -7,7 +7,7 @@ export async function registerUserService(
   password: string,
 ) {
   const emailExists = await db
-    .select()
+    .select({ name: users.name })
     .from(users)
     .where(eq(users.email, email));
   if (emailExists.length > 0) {
