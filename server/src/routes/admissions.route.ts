@@ -3,6 +3,6 @@ import * as admissionRoutes from "../controller/students/admissions.controller";
 
 const router = express.Router();
 
-router.post("/admission", admissionRoutes.createStudentAdmission);
+router.post("/register", admissionRoutes.createStudentAdmission);
 
 export default router;
