@@ -3,11 +3,13 @@ import { eq } from "drizzle-orm";
 import { admissions } from "../../database/schema";
 
 export async function createStudentAdmissionService(
+  application_id: string,
   first_name: string,
   middle_name: string,
   last_name: string,
   email: string,
   phone_number: number,
+  house_number: number,
   street: string,
   barangay: string,
   city: string,
@@ -31,11 +33,13 @@ export async function createStudentAdmissionService(
   return await db
     .insert(admissions)
     .values({
+      application_id,
       first_name,
       middle_name,
       last_name,
       email,
       phone_number,
+      house_number,
       street,
       barangay,
       city,

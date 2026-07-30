@@ -6,11 +6,13 @@ import * as admissionServices from "../../service/students/admissions.service";
 export async function createStudentAdmission(req: Request, res: Response) {
   try {
     const {
+      application_id,
       first_name,
       middle_name,
       last_name,
       email,
       phone_number,
+      house_number,
       street,
       barangay,
       city,
@@ -21,11 +23,13 @@ export async function createStudentAdmission(req: Request, res: Response) {
       year_graduated,
     } = req.body;
     const newAdmission = await admissionServices.createStudentAdmissionService(
+      application_id,
       first_name,
       middle_name,
       last_name,
       email,
       phone_number,
+      house_number,
       street,
       barangay,
       city,
