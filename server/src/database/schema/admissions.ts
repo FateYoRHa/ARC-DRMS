@@ -6,6 +6,7 @@ import {
   integer,
   text,
   timestamp,
+  boolean,
 } from "drizzle-orm/pg-core";
 
 export const entrance_status = pgEnum("entrance_status", [
@@ -40,6 +41,7 @@ export const admission = pgTable("admission", {
   previous_school: text(),
   year_graduated: integer().notNull(),
   status: status().default("pending"),
+  isActive: boolean().default(true),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updatedAt").defaultNow(),
 });
