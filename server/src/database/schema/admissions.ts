@@ -22,7 +22,7 @@ export const status = pgEnum("status", [
   "registered",
 ]);
 
-export const admission = pgTable("admission", {
+export const admissions = pgTable("admissions", {
   id: serial("id").primaryKey(),
   application_id: integer("application_id").unique(),
   entrance_status: entrance_status(),
