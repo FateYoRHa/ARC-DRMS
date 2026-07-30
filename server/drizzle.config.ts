@@ -7,8 +7,8 @@ if (!process.env.DATABASE_URL) {
 }
 
 export default defineConfig({
-  schema: "./src/database/schema.ts", // Your schema file path
-  out: "./drizzle", // Your migrations folder
+  schema: "./src/database/schema", // Your schema file path
+  out: "./src/database/migrations",
   dialect: "postgresql",
   dbCredentials: {
     url: process.env.DATABASE_URL,
