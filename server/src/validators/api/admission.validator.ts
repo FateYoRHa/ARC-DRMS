@@ -13,6 +13,7 @@ export const newAdmissionSchema = admissionInsertSchema
     updatedAt: true,
   })
   .extend({
+    application_id: z.string(),
     first_name: z.string().max(15),
     middle_name: z.string().max(15),
     last_name: z.string().max(15),

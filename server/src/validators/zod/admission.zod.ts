@@ -1,4 +1,4 @@
-import { createInsertSchema, createUpdateSchema } from "drizzle-orm/zod";
+import { createInsertSchema, createUpdateSchema } from "drizzle-zod";
 import { admissions } from "../../database/schema/admissions";
 
 // THESE Generate Zod schemas from the database schema.
