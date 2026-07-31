@@ -23,8 +23,7 @@ router.get("/", admissionRoutes.retrieveAllStudentAdmission);
 router.get("/:id", admissionRoutes.retrieveStudentAdmission);
 
 // archive
-router.patch(
-  "/archive/:id",
-  admissionRoutes.archiveStudentAdmission,
-);
+router.patch("/archive/:id", admissionRoutes.archiveStudentAdmission);
+router.patch("/restore/:id", admissionRoutes.restoreStudentAdmission);
+
 export default router;
