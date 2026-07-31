@@ -1,8 +1,6 @@
-import dotenv from "dotenv";
 import { defineConfig } from "drizzle-kit";
-
-dotenv.config();
-if (!process.env.DATABASE_URL) {
+import env from "./src/config/env";
+if (!env.DATABASE_URL) {
   throw new Error("DATABASE_URL is not set in the .env file");
 }
 
@@ -11,6 +9,6 @@ export default defineConfig({
   out: "./src/database/migrations",
   dialect: "postgresql",
   dbCredentials: {
-    url: process.env.DATABASE_URL,
+    url: env.DATABASE_URL,
   },
 });
