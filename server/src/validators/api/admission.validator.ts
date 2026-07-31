@@ -72,7 +72,6 @@ export const updateAdmissionSchema = admissionUpdateSchema
   .omit({
     id: true,
     createdAt: true,
-    updatedAt: true,
   })
   .refine((data) => Object.keys(data).length > 0, {
     message: "At least one field must be provided for update.",
