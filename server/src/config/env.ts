@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const env = cleanEnv(process.env, {
-  DATABASE_URL: url(),
+  DATABASE_URL: str(),
   PORT: port({ default: 5000 }),
 });
 
