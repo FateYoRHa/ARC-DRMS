@@ -114,7 +114,15 @@ export async function retriveStudentAdmissionService(application_id: number) {
 export async function archiveStudentAdmissionService(application_id: number) {
   return await db
     .update(admissions)
-    .set({ isActive: false, updatedAt:  new Date() })
+    .set({ isActive: false, updatedAt: new Date() })
+    .where(eq(admissions.application_id, application_id))
+    .returning();
+}
+
+export async function restoreStudentAdmissionService(application_id: number) {
+  return await db
+    .update(admissions)
+    .set({ isActive: true, updatedAt: new Date() })
     .where(eq(admissions.application_id, application_id))
     .returning();
 }
