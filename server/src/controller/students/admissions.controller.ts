@@ -128,10 +128,24 @@ export async function archiveStudentAdmission(req: Request, res: Response) {
   try {
     const application_id = req.params.id;
     await admissionServices.archiveStudentAdmissionService(application_id);
-    res.status(200).json({message: "Admission archived."});
+    res.status(200).json({ message: "Admission archived." });
   } catch (error) {
     const verifiedError = parseError(error);
-    console.log("Error at update admission controller", verifiedError);
+    console.log("Error at archive admission controller", verifiedError);
+    res
+      .status(verifiedError.status || 500)
+      .json({ message: verifiedError.message || "Internal Server Error." });
+  }
+}
+
+export async function restoreStudentAdmission(req: Request, res: Response) {
+  try {
+    const application_id = req.params.id;
+    await admissionServices.restoreStudentAdmissionService(application_id);
+    res.status(200).json({ message: "Admission restored." });
+  } catch (error) {
+    const verifiedError = parseError(error);
+    console.log("Error at restore admission controller", verifiedError);
     res
       .status(verifiedError.status || 500)
       .json({ message: verifiedError.message || "Internal Server Error." });
