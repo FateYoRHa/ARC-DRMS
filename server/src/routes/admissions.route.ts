@@ -18,5 +18,5 @@ router.put(
   validate(updateAdmissionSchema),
   admissionRoutes.updateStudentAdmission,
 );
-
+router.get("/", admissionRoutes.retrieveAllStudentAdmission);
 export default router;

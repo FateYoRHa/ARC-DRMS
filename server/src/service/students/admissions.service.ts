@@ -101,3 +101,7 @@ export async function updateStudentAdmissionService(
     .where(eq(admissions.application_id, application_id))
     .returning();
 }
+
+export async function retriveAllStudentAdmissionsService() {
+  return await db.select().from(admissions);
+}
