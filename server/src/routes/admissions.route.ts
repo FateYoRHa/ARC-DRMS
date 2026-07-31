@@ -19,4 +19,6 @@ router.put(
   admissionRoutes.updateStudentAdmission,
 );
 router.get("/", admissionRoutes.retrieveAllStudentAdmission);
+
+router.get("/:id", admissionRoutes.retrieveStudentAdmission);
 export default router;

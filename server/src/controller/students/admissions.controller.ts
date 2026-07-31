@@ -108,3 +108,18 @@ export async function retrieveAllStudentAdmission(req: Request, res: Response) {
       .json({ message: verifiedError.message || "Internal Server Error." });
   }
 }
+
+export async function retrieveStudentAdmission(req: Request, res: Response) {
+  try {
+    const application_id = req.params.id;
+    const admission =
+      await admissionServices.retriveStudentAdmissionService(application_id);
+    res.status(200).json(admission);
+  } catch (error) {
+    const verifiedError = parseError(error);
+    console.log("Error at update admission controller", verifiedError);
+    res
+      .status(verifiedError.status || 500)
+      .json({ message: verifiedError.message || "Internal Server Error." });
+  }
+}
