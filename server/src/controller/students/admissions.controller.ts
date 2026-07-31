@@ -48,3 +48,49 @@ export async function createStudentAdmission(req: Request, res: Response) {
       .json({ message: verifiedError.message || "Internal Server Error." });
   }
 }
+export async function updateStudentAdmission(req: Request, res: Response) {
+  try {
+    const application_id = req.params.id;
+    const {
+      first_name,
+      middle_name,
+      last_name,
+      email,
+      phone_number,
+      house_number,
+      street,
+      barangay,
+      city,
+      province,
+      zip_code,
+      country,
+      previous_school,
+      year_graduated,
+    } = req.body;
+    const updatedAdmission =
+      await admissionServices.updateStudentAdmissionService(
+        application_id,
+        first_name,
+        middle_name,
+        last_name,
+        email,
+        phone_number,
+        house_number,
+        street,
+        barangay,
+        city,
+        province,
+        zip_code,
+        country,
+        previous_school,
+        year_graduated,
+      );
+    res.status(200).json(updatedAdmission);
+  } catch (error) {
+    const verifiedError = parseError(error);
+    console.log("Error at update admission controller", verifiedError);
+    res
+      .status(verifiedError.status || 500)
+      .json({ message: verifiedError.message || "Internal Server Error." });
+  }
+}

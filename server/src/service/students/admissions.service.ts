@@ -51,3 +51,53 @@ export async function createStudentAdmissionService(
     })
     .returning();
 }
+
+export async function updateStudentAdmissionService(
+  application_id: number,
+  first_name: string,
+  middle_name: string,
+  last_name: string,
+  email: string,
+  phone_number: string,
+  house_number: string,
+  street: string,
+  barangay: string,
+  city: string,
+  province: string,
+  zip_code: number,
+  country: string,
+  previous_school: string,
+  year_graduated: number,
+) {
+  // const emailExists = await db
+  //   .select({ email: admissions.email })
+  //   .from(admissions)
+  //   .where(eq(admissions.email, email));
+  // if (emailExists.length > 0) {
+  //   const error = new Error("Email already exists") as Error & {
+  //     status: number;
+  //   };
+  //   error.status = 409;
+  //   throw error;
+  // }
+  return await db
+    .update(admissions)
+    .set({
+      first_name,
+      middle_name,
+      last_name,
+      email: email,
+      phone_number,
+      house_number,
+      street,
+      barangay,
+      city,
+      province,
+      zip_code,
+      country,
+      previous_school,
+      year_graduated,
+    })
+    .where(eq(admissions.application_id, application_id))
+    .returning();
+}
