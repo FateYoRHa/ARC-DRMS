@@ -1,79 +1,30 @@
 import { Request, Response } from "express";
-
+import {
+  CreateAdmissionInput,
+  UpdateAdmissionInput,
+} from "../../validators/api/admission.validator";
 import * as admissionServices from "../../service/students/admissions.service";
 
-export async function createStudentAdmission(req: Request, res: Response) {
-  const {
-    application_id,
-    first_name,
-    middle_name,
-    last_name,
-    email,
-    phone_number,
-    house_number,
-    street,
-    barangay,
-    city,
-    province,
-    zip_code,
-    country,
-    previous_school,
-    year_graduated,
-  } = req.body;
+type CreateAdmissionRequest = Request<{}, {}, CreateAdmissionInput>;
+type UpdateAdmissionRequest = Request<{ id: string }, {}, UpdateAdmissionInput>;
+
+export async function createStudentAdmission(
+  req: CreateAdmissionRequest,
+  res: Response,
+) {
   const newAdmission = await admissionServices.createStudentAdmissionService(
-    application_id,
-    first_name,
-    middle_name,
-    last_name,
-    email,
-    phone_number,
-    house_number,
-    street,
-    barangay,
-    city,
-    province,
-    zip_code,
-    country,
-    previous_school,
-    year_graduated,
+    req.body,
   );
   res.status(200).json(newAdmission);
 }
-export async function updateStudentAdmission(req: Request, res: Response) {
-  const application_id = req.params.id;
-  const {
-    first_name,
-    middle_name,
-    last_name,
-    email,
-    phone_number,
-    house_number,
-    street,
-    barangay,
-    city,
-    province,
-    zip_code,
-    country,
-    previous_school,
-    year_graduated,
-  } = req.body;
+export async function updateStudentAdmission(
+  req: UpdateAdmissionRequest,
+  res: Response,
+) {
   const updatedAdmission =
     await admissionServices.updateStudentAdmissionService(
-      application_id,
-      first_name,
-      middle_name,
-      last_name,
-      email,
-      phone_number,
-      house_number,
-      street,
-      barangay,
-      city,
-      province,
-      zip_code,
-      country,
-      previous_school,
-      year_graduated,
+      req.body,
+      req.params.id,
     );
   res.status(200).json(updatedAdmission);
 }
