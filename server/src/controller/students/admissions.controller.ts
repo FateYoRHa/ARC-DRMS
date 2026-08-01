@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import {
+  createAdmissionSchema,
+  updateAdmissionSchema,
   CreateAdmissionInput,
   UpdateAdmissionInput,
 } from "../../validators/api/admission.validator";
@@ -24,7 +26,7 @@ export async function updateStudentAdmission(
   const updatedAdmission =
     await admissionServices.updateStudentAdmissionService(
       req.body,
-      req.params.id,
+      Number(req.params.id),
     );
   res.status(200).json(updatedAdmission);
 }
@@ -36,20 +38,20 @@ export async function retrieveAllStudentAdmission(req: Request, res: Response) {
 }
 
 export async function retrieveStudentAdmission(req: Request, res: Response) {
-  const application_id = req.params.id;
+  const application_id = Number(req.params.id);
   const admission =
     await admissionServices.retriveStudentAdmissionService(application_id);
   res.status(200).json(admission);
 }
 
 export async function archiveStudentAdmission(req: Request, res: Response) {
-  const application_id = req.params.id;
+  const application_id = Number(req.params.id);
   await admissionServices.archiveStudentAdmissionService(application_id);
   res.status(200).json({ message: "Admission archived." });
 }
 
 export async function restoreStudentAdmission(req: Request, res: Response) {
-  const application_id = req.params.id;
+  const application_id = Number(req.params.id);
   await admissionServices.restoreStudentAdmissionService(application_id);
   res.status(200).json({ message: "Admission restored." });
 }
