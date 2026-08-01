@@ -50,7 +50,8 @@ export const newAdmissionSchema = admissionInsertSchema
       .trim()
       .regex(/^\d{3,9}$/, {
         message: "Invalid zip code.",
-      }),
+      })
+      .transform(Number),
     country: z
       .string()
       .trim()
@@ -83,4 +84,3 @@ export type CreateAdmissionInput = z.infer<typeof newAdmissionSchema>;
 export type UpdateAdmissionInput = z.infer<typeof updateAdmissionSchema>;
 
 export type NewAdmission = InferInsertModel<typeof admissions>;
-export type UpdateAdmission = InferInsertModel<typeof admissions>;
