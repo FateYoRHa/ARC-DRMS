@@ -1,6 +1,7 @@
 import { db } from "../../database/db";
 import { eq } from "drizzle-orm";
 import { admissions } from "../../database/schema";
+import { AppError } from "../../errors/AppError";
 
 export async function createStudentAdmissionService(
   application_id: string,
@@ -24,11 +25,7 @@ export async function createStudentAdmissionService(
     .from(admissions)
     .where(eq(admissions.email, email));
   if (emailExists.length > 0) {
-    const error = new Error("Email already exists") as Error & {
-      status: number;
-    };
-    error.status = 409;
-    throw error;
+    throw new AppError(409, "Email already exists");
   }
   return await db
     .insert(admissions)
@@ -74,11 +71,7 @@ export async function updateStudentAdmissionService(
   //   .from(admissions)
   //   .where(eq(admissions.email, email));
   // if (emailExists.length > 0) {
-  //   const error = new Error("Email already exists") as Error & {
-  //     status: number;
-  //   };
-  //   error.status = 409;
-  //   throw error;
+  //   throw new AppError(409, "Email already exists");
   // }
   return await db
     .update(admissions)
