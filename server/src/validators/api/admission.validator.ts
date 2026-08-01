@@ -3,6 +3,8 @@ import {
   admissionInsertSchema,
   admissionUpdateSchema,
 } from "../zod/admission.zod";
+import { InferInsertModel } from "drizzle-orm";
+import { admissions } from "../../database/schema";
 
 const currentYear = new Date().getFullYear();
 
@@ -13,7 +15,7 @@ export const newAdmissionSchema = admissionInsertSchema
     updatedAt: true,
   })
   .extend({
-    application_id: z.string(),
+    application_id: z.number().int().positive(),
     first_name: z.string().max(15),
     middle_name: z.string().max(15),
     last_name: z.string().max(15),
@@ -76,3 +78,9 @@ export const updateAdmissionSchema = admissionUpdateSchema
   .refine((data) => Object.keys(data).length > 0, {
     message: "At least one field must be provided for update.",
   });
+
+export type CreateAdmissionInput = z.infer<typeof newAdmissionSchema>;
+export type UpdateAdmissionInput = z.infer<typeof updateAdmissionSchema>;
+
+export type NewAdmission = InferInsertModel<typeof admissions>;
+export type UpdateAdmission = InferInsertModel<typeof admissions>;
