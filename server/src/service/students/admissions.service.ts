@@ -5,7 +5,7 @@ import { AppError } from "../../errors/AppError";
 
 import {
   NewAdmission,
-  UpdateAdmission,
+  UpdateAdmissionInput,
 } from "../../validators/api/admission.validator";
 
 export async function createStudentAdmissionService(student: NewAdmission) {
@@ -20,7 +20,7 @@ export async function createStudentAdmissionService(student: NewAdmission) {
 }
 
 export async function updateStudentAdmissionService(
-  student: UpdateAdmission,
+  student: UpdateAdmissionInput,
   application_id: number,
 ) {
   // const emailExists = await db
