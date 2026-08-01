@@ -7,7 +7,8 @@ import env from "./config/env";
 import userRoutes from "./auth/users.route";
 import admissionRoutes from "./routes/admissions.route";
 
-import {errorMiddleware} from "./middleware/global.error.middleware";
+import { errorMiddleware } from "./middleware/global.error.middleware";
+import { notFoundMiddleware } from "./middleware/notFound.middleware";
 
 const app = express();
 const port = Number(env.PORT ?? 5000);
@@ -31,7 +32,9 @@ app.use("/admissions", admissionRoutes);
 // --------------------
 //! ERROR MIDDLEWARES
 // --------------------
+app.use(notFoundMiddleware); // Handles requests that don't match any registered route
 
+// GLOBAL ERROR HANDLER, KEEP THIS LAST
 app.use(errorMiddleware);
 
 
