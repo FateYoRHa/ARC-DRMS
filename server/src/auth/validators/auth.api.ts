@@ -24,5 +24,10 @@ export const registerSchema = z
     path: ["confirmPassword"], // Highlights the confirm field on error
   });
 
+  export const loginSchema = z.object({
+    email: z.string().email("Invalid email address"),
+    password: z.string().min(1, "Password is required"),
+  });
+
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type RegisterUserInput = InferInsertModel<typeof users>;
