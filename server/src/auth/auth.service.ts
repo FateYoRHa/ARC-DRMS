@@ -4,22 +4,20 @@ import { eq } from "drizzle-orm";
 import { users } from "../database/schema";
 import { AppError } from "../errors/AppError";
 import { hashPassword } from "../utils/password";
-export async function registerUserService(
-  name: string,
-  email: string,
-  password: string,
-) {
+import { RegisterUserInput } from "./validators/auth.api";
+
+export async function registerUserService(user: RegisterUserInput) {
   const emailExists = await db
-    .select({ name: users.name })
+    .select()
     .from(users)
-    .where(eq(users.email, email));
+    .where(eq(users.email, user.email));
   if (emailExists.length > 0) {
     throw new AppError(409, "Email already exists");
   }
 
-  const hashedPassword = await hashPassword(password);
+  const hashedPassword = await hashPassword(user.password);
   return await db
     .insert(users)
-    .values({ name, email, password: hashedPassword })
+    .values({ name: user.name, email: user.email, password: hashedPassword })
     .returning();
 }
