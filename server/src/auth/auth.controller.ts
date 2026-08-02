@@ -9,4 +9,8 @@ export async function registerUser(req: RegisterUserRequest, res: Response) {
   res.status(200).json(user);
 }
 
-export async function login(req: Request, res: Response) {}
+export async function login(req: Request, res: Response) {
+  const { email, password } = req.body;
+  await authService.loginService(email, password);
+  res.status(200).json({ message: "Login successful" });
+}
