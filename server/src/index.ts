@@ -4,7 +4,7 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 
 import env from "./config/env";
-import userRoutes from "./auth/users.route";
+import userRoutes from "./auth/auth.route";
 import admissionRoutes from "./routes/admissions.route";
 
 import { errorMiddleware } from "./middleware/global.error.middleware";
