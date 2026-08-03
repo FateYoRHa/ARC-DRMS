@@ -16,3 +16,4 @@ export const users = pgTable("users", {
   is_active: boolean("is_active").default(true),
   createdAt: timestamp("created_at").defaultNow(),
 });
+export type User = typeof users.$inferSelect;
