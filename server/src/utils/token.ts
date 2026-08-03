@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import type { StringValue } from "ms";
 import env from "../config/env";
 import { AppError } from "../errors/AppError";
+import type { AccessTokenPayload } from "../types/auth";
 
 export function signAccessToken(payload: {
   id: number;
@@ -26,9 +27,12 @@ export function signRefreshToken(payload: {
   return refreshToken;
 }
 
-export function verifyAccessToken(accessToken: string) {
+export function verifyAccessToken(accessToken: string): AccessTokenPayload {
   try {
-    return jwt.verify(accessToken, env.ACCESS_TOKEN_SECRET);
+    return jwt.verify(
+      accessToken,
+      env.ACCESS_TOKEN_SECRET,
+    ) as AccessTokenPayload;
   } catch (error) {
     if (error instanceof jwt.TokenExpiredError) {
       throw new AppError(401, "Access token expired.");
