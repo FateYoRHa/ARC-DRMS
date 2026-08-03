@@ -3,6 +3,9 @@ import type { StringValue } from "ms";
 import env from "../config/env";
 import { AppError } from "../errors/AppError";
 import type { AccessTokenPayload } from "../types/auth";
+import bcrypt from "bcrypt";
+
+const SALT_ROUNDS = 12;
 
 export function signAccessToken(payload: {
   id: number;
@@ -51,4 +54,15 @@ export function verifyRefreshToken(refreshToken: string) {
       throw new AppError(401, "INVALID_REFRESH_TOKEN");
     }
   }
+}
+
+export async function hashRefreshToken(token: string) {
+  return bcrypt.hash(token, SALT_ROUNDS);
+}
+
+export async function compareRefreshToken(
+  token: string,
+  hashedToken: string,
+) {
+  return bcrypt.compare(token, hashedToken);
 }
