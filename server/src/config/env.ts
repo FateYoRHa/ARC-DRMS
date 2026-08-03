@@ -1,4 +1,4 @@
-import { cleanEnv, str, port, url } from "envalid";
+import { cleanEnv, str, port } from "envalid";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -7,8 +7,12 @@ const env = cleanEnv(process.env, {
   PORT: port({ default: 5000 }),
   ACCESS_TOKEN_SECRET: str(),
   REFRESH_TOKEN_SECRET: str(),
-  ACCESS_TOKEN_EXPIRES: str(),
-  REFRESH_TOKEN_EXPIRES: str(),
+  ACCESS_TOKEN_EXPIRES: str({
+    choices: ["15m", "1h", "7d"],
+  }),
+  REFRESH_TOKEN_EXPIRES: str({
+    choices: ["7d", "14d", "30d"],
+  }),
 });
 
 export default env;
