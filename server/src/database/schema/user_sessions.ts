@@ -18,6 +18,7 @@ export const user_sessions = pgTable("user_sessions", {
     })
     .notNull(),
   refresh_token: varchar("refresh_token").unique().notNull(),
+  token_version: integer("token_version").notNull(),
   user_agent: varchar("user_agent"),
   ip_address: varchar("ip_address").notNull(),
   expires_at: date("expires_at").notNull(),

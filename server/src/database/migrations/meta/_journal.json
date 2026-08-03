@@ -43,6 +43,13 @@
       "when": 1785795160486,
       "tag": "0005_small_miracleman",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1785800053074,
+      "tag": "0006_plain_energizer",
+      "breakpoints": true
     }
   ]
 }
