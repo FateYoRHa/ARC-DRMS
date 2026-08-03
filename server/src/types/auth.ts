@@ -15,4 +15,7 @@ export interface AccessTokenPayload {
 export interface RefreshTokenPayload {
   id: number;
   sessionId: string;
+  token_version: number;
+  iat: number;
+  exp: number;
 }

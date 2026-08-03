@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import type { StringValue } from "ms";
 import env from "../config/env";
 import { AppError } from "../errors/AppError";
-import type { AccessTokenPayload } from "../types/auth";
+import type { AccessTokenPayload, RefreshTokenPayload } from "../types/auth";
 import bcrypt from "bcrypt";
 
 const SALT_ROUNDS = 12;
@@ -44,9 +44,12 @@ export function verifyAccessToken(accessToken: string): AccessTokenPayload {
     }
   }
 }
-export function verifyRefreshToken(refreshToken: string) {
+export function verifyRefreshToken(refreshToken: string): RefreshTokenPayload {
   try {
-    return jwt.verify(refreshToken, env.REFRESH_TOKEN_SECRET);
+    return jwt.verify(
+      refreshToken,
+      env.REFRESH_TOKEN_SECRET,
+    ) as RefreshTokenPayload;
   } catch (error) {
     if (error instanceof jwt.TokenExpiredError) {
       throw new AppError(401, "REFRESH_TOKEN_EXPIRED");
@@ -60,9 +63,6 @@ export async function hashRefreshToken(token: string) {
   return bcrypt.hash(token, SALT_ROUNDS);
 }
 
-export async function compareRefreshToken(
-  token: string,
-  hashedToken: string,
-) {
+export async function compareRefreshToken(token: string, hashedToken: string) {
   return bcrypt.compare(token, hashedToken);
 }
