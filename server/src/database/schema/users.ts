@@ -6,9 +6,6 @@ import {
   timestamp,
   pgEnum,
 } from "drizzle-orm/pg-core";
-import { relations } from "drizzle-orm";
-
-import { user_sessions } from "./user_sessions";
 
 export const roles = pgEnum("roles", ["user", "admin", "guest", "student"]);
 
@@ -23,9 +20,3 @@ export const users = pgTable("users", {
 });
 export type User = typeof users.$inferSelect;
 
-export const userSessionsRelations = relations(user_sessions, ({ one }) => ({
-  user: one(users, {
-    fields: [user_sessions.user_id],
-    references: [users.id],
-  }),
-}));

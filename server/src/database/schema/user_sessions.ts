@@ -8,7 +8,6 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 import { users } from "./users";
-import { relations } from "drizzle-orm";
 export const user_sessions = pgTable("user_sessions", {
   id: serial("id").primaryKey(),
   session_id: uuid("session_id").unique().notNull(),
@@ -27,7 +26,3 @@ export const user_sessions = pgTable("user_sessions", {
   created_at: timestamp("created_at").defaultNow(),
   updated_at: timestamp("updated_at").defaultNow(),
 });
-
-export const usersRelations = relations(users, ({ many }) => ({
-  sessions: many(user_sessions),
-}));
