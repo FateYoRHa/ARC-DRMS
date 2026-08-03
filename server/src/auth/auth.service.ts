@@ -7,6 +7,8 @@ import { hashPassword } from "../utils/password";
 import { comparePassword } from "../utils/password";
 import { RegisterUserInput } from "./validators/auth.api";
 
+import { signAccessToken, signRefreshToken } from "../utils/token";
+
 export async function registerUserService(user: RegisterUserInput) {
   const emailExists = await db
     .select()
@@ -17,10 +19,29 @@ export async function registerUserService(user: RegisterUserInput) {
   }
 
   const hashedPassword = await hashPassword(user.password);
-  return await db
+
+  const sessionId = crypto.randomUUID();
+
+  const [newUser] = await db
     .insert(users)
     .values({ name: user.name, email: user.email, password: hashedPassword })
     .returning();
+
+  if (!newUser) {
+    throw new AppError(400, "Failed to create user.");
+  }
+  const refreshToken = signRefreshToken({
+    id: newUser.id,
+    session_id: sessionId,
+    token_version: 1,
+  });
+  const accessToken = signAccessToken({
+    id: newUser.id,
+    role: newUser.role,
+    session_id: sessionId,
+    token_version: 1,
+  });
+  return { newUser, accessToken };
 }
 
 export async function loginService(email: string, password: string) {
@@ -44,6 +65,19 @@ export async function loginService(email: string, password: string) {
   if (!isValid) {
     throw new AppError(401, "Invalid email or password");
   }
+  const sessionId = crypto.randomUUID();
+
+  const refreshToken = signRefreshToken({
+    id: user.id,
+    session_id: sessionId,
+    token_version: 1,
+  });
+  const accessToken = signAccessToken({
+    id: user.id,
+    role: user.role,
+    session_id: sessionId,
+    token_version: 1,
+  });
 
   return user;
 }
