@@ -36,6 +36,13 @@
       "when": 1785714329540,
       "tag": "0004_warm_morg",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1785795160486,
+      "tag": "0005_small_miracleman",
+      "breakpoints": true
     }
   ]
 }
