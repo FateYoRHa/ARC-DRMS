@@ -28,3 +28,6 @@ export const user_sessions = pgTable("user_sessions", {
   updated_at: timestamp("updated_at").defaultNow(),
 });
 
+export const usersRelations = relations(users, ({ many }) => ({
+  sessions: many(user_sessions),
+}));
