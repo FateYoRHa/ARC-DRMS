@@ -18,7 +18,18 @@ export async function registerUser(req: RegisterUserRequest, res: Response) {
 }
 
 export async function login(req: Request, res: Response) {
+  const ip_address = req.ip;
+  if (!ip_address) {
+    throw new AppError(500, "Unable to determine client IP");
+  }
   const { email, password } = req.body;
-  await authService.loginService(email, password);
-  res.status(200).json({ message: "Login successful" });
+  const { accessToken, refreshToken } = await authService.loginService(
+    email,
+    password,
+    ip_address,
+  );
+  res.status(200).json({
+    message: "Login successful",
+    ACCESS_TOKEN: accessToken,
+  });
 }

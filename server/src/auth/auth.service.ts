@@ -77,7 +77,11 @@ export async function registerUserService(
   return { user: newUser, accessToken };
 }
 
-export async function loginService(email: string, password: string) {
+export async function loginService(
+  email: string,
+  password: string,
+  ip_address: string,
+) {
   const user = await db
     .select({
       id: users.id,
@@ -95,16 +99,41 @@ export async function loginService(email: string, password: string) {
   }
 
   const isValid = await comparePassword(password, user.password);
+
   if (!isValid) {
     throw new AppError(401, "Invalid email or password");
   }
+  // generate session ID
   const sessionId = crypto.randomUUID();
-
+  // generate refresh token
   const refreshToken = signRefreshToken({
     id: user.id,
     session_id: sessionId,
     token_version: 1,
   });
+
+  const generatedRefToken = verifyRefreshToken(refreshToken);
+
+  // hash refresh token
+  const hashedRefreshToken = await hashRefreshToken(refreshToken);
+
+  // store refresh(hashed) token to database
+  await db
+    .insert(user_sessions)
+    .values({
+      session_id: generatedRefToken.session_id,
+      user_id: user.id,
+      refresh_token: hashedRefreshToken,
+      token_version: generatedRefToken.token_version,
+      user_agent: "Temporary user agent", //! to be changed later, comes from header
+      ip_address: ip_address,
+      expires_at: new Date(generatedRefToken.exp * 1000),
+      last_used_at: new Date(generatedRefToken.iat * 1000),
+      revoked_at: null,
+    })
+    .returning();
+
+  // generate access token
   const accessToken = signAccessToken({
     id: user.id,
     role: user.role,
@@ -112,5 +141,5 @@ export async function loginService(email: string, password: string) {
     token_version: 1,
   });
 
-  return user;
+  return { accessToken, refreshToken };
 }
