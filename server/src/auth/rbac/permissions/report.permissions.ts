@@ -5,4 +5,5 @@ export const reports = {
   ARCHIVE: "reports.archive",
   RESTORE: "reports.restore",
   DELETE: "reports.delete",
+  GENERATE: "reports.generate",
 };
