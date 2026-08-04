@@ -1,15 +1,23 @@
 import { db } from "../database/db";
 import { eq } from "drizzle-orm";
 
-import { users } from "../database/schema";
+import { users, user_sessions } from "../database/schema";
 import { AppError } from "../errors/AppError";
 import { hashPassword } from "../utils/password";
 import { comparePassword } from "../utils/password";
 import { RegisterUserInput } from "./validators/auth.api";
 
-import { signAccessToken, signRefreshToken } from "../utils/token";
-
-export async function registerUserService(user: RegisterUserInput) {
+import {
+  hashRefreshToken,
+  signAccessToken,
+  signRefreshToken,
+  verifyRefreshToken,
+} from "../utils/token";
+type SessionInsert = typeof user_sessions.$inferInsert;
+export async function registerUserService(
+  user: RegisterUserInput,
+  ip_address: string,
+) {
   const emailExists = await db
     .select()
     .from(users)
@@ -35,13 +43,38 @@ export async function registerUserService(user: RegisterUserInput) {
     session_id: sessionId,
     token_version: 1,
   });
+
+  const refresh = verifyRefreshToken(refreshToken);
+  console.log(refresh);
+  console.log(refresh.exp);
+  console.log(typeof refresh.exp);
+  console.log(new Date(refresh.exp * 1000));
+
+  console.log(Number.isNaN(refresh.exp));
+  const hashedRefreshToken = await hashRefreshToken(refreshToken);
+  const reftoken = await db
+    .insert(user_sessions)
+    .values({
+      session_id: refresh.session_id,
+      user_id: newUser.id,
+      refresh_token: hashedRefreshToken,
+      token_version: refresh.token_version,
+      user_agent: "Temporary user agent", //! to be changed later, comes from header
+      ip_address: ip_address,
+      expires_at: new Date(refresh.exp * 1000),
+      last_used_at: new Date(refresh.iat * 1000),
+      revoked_at: null,
+    })
+    .returning();
+  console.log(reftoken);
+
   const accessToken = signAccessToken({
     id: newUser.id,
     role: newUser.role,
     session_id: sessionId,
     token_version: 1,
   });
-  return { newUser, accessToken };
+  return { user: newUser, accessToken };
 }
 
 export async function loginService(email: string, password: string) {
