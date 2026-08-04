@@ -3,6 +3,8 @@ import { Request, Response } from "express";
 import * as authService from "./auth.service";
 import { RegisterUserInput } from "./validators/auth.api";
 import { AppError } from "../errors/AppError";
+import env from "../config/env";
+import { refreshCookieOptions } from "../config/cookies";
 type RegisterUserRequest = Request<{}, {}, RegisterUserInput>;
 
 export async function registerUser(req: RegisterUserRequest, res: Response) {
@@ -10,10 +12,10 @@ export async function registerUser(req: RegisterUserRequest, res: Response) {
   if (!ip_address) {
     throw new AppError(500, "Unable to determine client IP");
   }
-  const { user, accessToken } = await authService.registerUserService(
-    req.body,
-    ip_address,
-  );
+  const { user, accessToken, refreshToken } =
+    await authService.registerUserService(req.body, ip_address);
+  // Store the refresh token in an HTTP-only cookie
+  res.cookie("refreshToken", refreshToken, refreshCookieOptions);
   res.status(200).json({ user, accessToken });
 }
 
@@ -28,6 +30,8 @@ export async function login(req: Request, res: Response) {
     password,
     ip_address,
   );
+  // Store the refresh token in an HTTP-only cookie
+  res.cookie("refreshToken", refreshToken, refreshCookieOptions);
   res.status(200).json({
     message: "Login successful",
     ACCESS_TOKEN: accessToken,
@@ -36,6 +40,9 @@ export async function login(req: Request, res: Response) {
 
 export async function logout(req: Request, res: Response) {
   await authService.logoutService(req.cookies.refreshToken);
+  // clear stored cookie
+  res.clearCookie("refreshToken", refreshCookieOptions);
+
   res.status(200).json({ message: "Logged out successfully" });
 }
 
@@ -50,6 +57,9 @@ export async function refreshAccessToken(req: Request, res: Response) {
     ip_address,
     req.user.role,
   );
+
+  // Store the refresh token in an HTTP-only cookie
+  res.cookie("refreshToken", refreshToken, refreshCookieOptions);
 
   res.status(200).json({ ACCESS_TOKEN: accessToken, user: req.user });
 }
