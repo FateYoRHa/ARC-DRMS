@@ -13,6 +13,8 @@ const env = cleanEnv(process.env, {
   REFRESH_TOKEN_EXPIRES: str({
     choices: ["7d", "14d", "30d"],
   }),
+  NODE_ENV: str(),
+  COOKIE_SECRET: str(),
 });
 
 export default env;
