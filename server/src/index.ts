@@ -22,7 +22,7 @@ app.use(
   }),
 );
 app.use(helmet());
-app.use(cookieParser());
+app.use(cookieParser(env.COOKIE_SECRET));
 
 // --------------------
 //* API routes
