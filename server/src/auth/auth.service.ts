@@ -143,3 +143,10 @@ export async function loginService(
 
   return { accessToken, refreshToken };
 }
+
+export async function logoutService(refreshToken: string) {
+  const token = verifyRefreshToken(refreshToken);
+  return await db
+    .delete(user_sessions)
+    .where(eq(user_sessions.session_id, token.session_id));
+}

@@ -33,3 +33,8 @@ export async function login(req: Request, res: Response) {
     ACCESS_TOKEN: accessToken,
   });
 }
+
+export async function logout(req: Request, res: Response) {
+  await authService.logoutService(req.cookies.refreshToken);
+  res.status(200).json({ message: "Logged out successfully" });
+}
