@@ -4,7 +4,7 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 
 import env from "./config/env";
-import userRoutes from "./auth/auth.route";
+import authRoutes from "./auth/auth.route";
 import admissionRoutes from "./routes/admissions.route";
 
 import { errorMiddleware } from "./middleware/global.error.middleware";
@@ -24,7 +24,7 @@ app.use(cookieParser());
 // --------------------
 
 // AUTH ROUTES
-app.use("/users", userRoutes);
+app.use("/users", authRoutes);
 
 // ADMISSIONS ROUTES
 app.use("/admissions", admissionRoutes);
