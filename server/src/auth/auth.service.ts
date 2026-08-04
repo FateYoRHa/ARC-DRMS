@@ -47,7 +47,7 @@ export async function registerUserService(
 
   const hashedRefreshToken = await hashRefreshToken(refreshToken);
 
-  const reftoken = await db
+  await db
     .insert(user_sessions)
     .values({
       session_id: refresh.session_id,
