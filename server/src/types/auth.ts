@@ -1,3 +1,4 @@
+import { UUID } from "crypto";
 import { User } from "../database/schema";
 export interface AuthenticatedUser {
   id: number;
@@ -8,13 +9,13 @@ export interface AuthenticatedUser {
 export interface AccessTokenPayload {
   id: number;
   role: User["role"];
-  session_id: string;
+  session_id: UUID;
   token_version: number;
 }
 
 export interface RefreshTokenPayload {
   id: number;
-  sessionId: string;
+  session_id: UUID;
   token_version: number;
   iat: number;
   exp: number;
