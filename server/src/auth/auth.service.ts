@@ -69,7 +69,7 @@ export async function registerUserService(
     session_id: sessionId,
     token_version: 1,
   });
-  return { user: newUser, accessToken };
+  return { user: newUser, accessToken, refreshToken };
 }
 
 export async function loginService(

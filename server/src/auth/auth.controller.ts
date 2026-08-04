@@ -10,7 +10,7 @@ export async function registerUser(req: RegisterUserRequest, res: Response) {
   if (!ip_address) {
     throw new AppError(500, "Unable to determine client IP");
   }
-  const { user, accessToken } = await authService.registerUserService(
+  const { user, accessToken, refreshToken } = await authService.registerUserService(
     req.body,
     ip_address,
   );
