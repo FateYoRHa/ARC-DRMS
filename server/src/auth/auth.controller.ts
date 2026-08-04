@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import * as authService from "./auth.service";
 import { RegisterUserInput } from "./validators/auth.api";
 import { AppError } from "../errors/AppError";
+import env from "../config/env";
 type RegisterUserRequest = Request<{}, {}, RegisterUserInput>;
 
 export async function registerUser(req: RegisterUserRequest, res: Response) {
@@ -10,10 +11,16 @@ export async function registerUser(req: RegisterUserRequest, res: Response) {
   if (!ip_address) {
     throw new AppError(500, "Unable to determine client IP");
   }
-  const { user, accessToken, refreshToken } = await authService.registerUserService(
-    req.body,
-    ip_address,
-  );
+  const { user, accessToken, refreshToken } =
+    await authService.registerUserService(req.body, ip_address);
+  // Store the refresh token in an HTTP-only cookie
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true, // Prevents XSS script access
+    secure: env.NODE_ENV === "production", // Sends over HTTPS only
+    // sameSite: "strict", // Mitigates CSRF attacks (use in production)
+    sameSite: "lax",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // Expires in 7 days (matches JWT)
+  });
   res.status(200).json({ user, accessToken });
 }
 
@@ -28,6 +35,13 @@ export async function login(req: Request, res: Response) {
     password,
     ip_address,
   );
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true, // Prevents XSS script access
+    secure: env.NODE_ENV === "production", // Sends over HTTPS only
+    // sameSite: "strict", // Mitigates CSRF attacks (use in production)
+    sameSite: "lax",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // Expires in 7 days (matches JWT)
+  });
   res.status(200).json({
     message: "Login successful",
     ACCESS_TOKEN: accessToken,
@@ -50,6 +64,13 @@ export async function refreshAccessToken(req: Request, res: Response) {
     ip_address,
     req.user.role,
   );
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true, // Prevents XSS script access
+    secure: env.NODE_ENV === "production", // Sends over HTTPS only
+    // sameSite: "strict", // Mitigates CSRF attacks (use in production)
+    sameSite: "lax",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // Expires in 7 days (matches JWT)
+  });
 
   res.status(200).json({ ACCESS_TOKEN: accessToken, user: req.user });
 }
