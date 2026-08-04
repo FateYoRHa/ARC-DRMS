@@ -40,6 +40,9 @@ export async function login(req: Request, res: Response) {
 
 export async function logout(req: Request, res: Response) {
   await authService.logoutService(req.cookies.refreshToken);
+  // clear stored cookie
+  res.clearCookie("refreshToken", refreshCookieOptions);
+
   res.status(200).json({ message: "Logged out successfully" });
 }
 
@@ -57,6 +60,6 @@ export async function refreshAccessToken(req: Request, res: Response) {
 
   // Store the refresh token in an HTTP-only cookie
   res.cookie("refreshToken", refreshToken, refreshCookieOptions);
-  
+
   res.status(200).json({ ACCESS_TOKEN: accessToken, user: req.user });
 }
