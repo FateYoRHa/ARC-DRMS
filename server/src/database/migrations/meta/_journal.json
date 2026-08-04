@@ -50,6 +50,13 @@
       "when": 1785800053074,
       "tag": "0006_plain_energizer",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1785802220899,
+      "tag": "0007_new_jean_grey",
+      "breakpoints": true
     }
   ]
 }
