@@ -13,7 +13,6 @@ import {
   signRefreshToken,
   verifyRefreshToken,
 } from "../utils/token";
-type SessionInsert = typeof user_sessions.$inferInsert;
 export async function registerUserService(
   user: RegisterUserInput,
   ip_address: string,
@@ -45,13 +44,9 @@ export async function registerUserService(
   });
 
   const refresh = verifyRefreshToken(refreshToken);
-  console.log(refresh);
-  console.log(refresh.exp);
-  console.log(typeof refresh.exp);
-  console.log(new Date(refresh.exp * 1000));
 
-  console.log(Number.isNaN(refresh.exp));
   const hashedRefreshToken = await hashRefreshToken(refreshToken);
+
   const reftoken = await db
     .insert(user_sessions)
     .values({
@@ -66,7 +61,6 @@ export async function registerUserService(
       revoked_at: null,
     })
     .returning();
-  console.log(reftoken);
 
   const accessToken = signAccessToken({
     id: newUser.id,
