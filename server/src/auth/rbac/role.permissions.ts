@@ -3,24 +3,22 @@ import * as permissions from "./permissions/index.permissions";
 
 export const role_permissions = {
   [roles.ADMIN]: [
-    permissions.students,
-    permissions.admissions,
-    permissions.records,
-    permissions.dashboard.READ,
-    permissions.reports.READ,
-    permissions.reports.GENERATE,
+    // students
+    permissions.studentPermissions,
+    // admissions
+    permissions.admissionPermissions,
+    // records
+    permissions.recordPermissions,
+    // dashboard
+    permissions.dashboardPermissions,
+    // reports
+    permissions.reportPermissions,
   ],
   [roles.REGISTRAR]: [
     // students
-    permissions.students.READ,
-    permissions.students.ARCHIVE,
-    permissions.students.CREATE,
-    permissions.students.UPDATE,
-    permissions.students.RESTORE,
+    permissions.studentPermissions,
     // admissions (enrollment)
-    permissions.admissions.READ,
-    permissions.admissions.UPDATE,
-    permissions.admissions.CREATE,
+    permissions.admissionPermissions,
     // records
     permissions.records.READ,
     permissions.records.CREATE,
@@ -66,6 +64,8 @@ export const role_permissions = {
     // grades
     permissions.grades.READ_OWN,
     // admission
-    permissions.admissions.VIEW_ADMISSION,
+    permissions.admissions.READ_ADMISSION,
   ],
 };
+
+export type Permissions = typeof role_permissions;

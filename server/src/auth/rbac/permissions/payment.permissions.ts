@@ -5,4 +5,6 @@ export const payments = {
   ARCHIVE: "payments.archive",
   RESTORE: "payments.restore",
   DELETE: "payments.delete",
-};
+} as const;
+
+export const paymentPermissions = Object.values(payments);

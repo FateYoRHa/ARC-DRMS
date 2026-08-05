@@ -6,4 +6,6 @@ export const grades = {
   ARCHIVE: "grades.archive",
   RESTORE: "grades.restore",
   DELETE: "grades.delete",
-};
+} as const;
+
+export const gradespermissions = Object.values(grades);

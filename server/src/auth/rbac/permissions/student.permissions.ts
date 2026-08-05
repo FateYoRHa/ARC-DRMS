@@ -7,4 +7,6 @@ export const students = {
   DELETE: "stutents.delete",
   READ_PROFILE: "students.read.profile",
   READ_STUDENT: "student.read.student",
-};
+} as const;
+
+export const studentPermissions = Object.values(students);

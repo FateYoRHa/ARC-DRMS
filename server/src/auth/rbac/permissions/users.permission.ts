@@ -6,4 +6,6 @@ export const users = {
   RESTORE: "users.restore",
   DELETE: "users.delete",
   MANAGE: "users.manage",
-};
+} as const;
+
+export const userPermissions = Object.values(users);
