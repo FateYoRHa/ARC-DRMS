@@ -1,10 +1,10 @@
 export const students = {
-  READ: "stutents.read",
-  UPDATE: "stutents.update",
-  CREATE: "stutents.create",
-  ARCHIVE: "stutents.archive",
-  RESTORE: "stutents.restore",
-  DELETE: "stutents.delete",
+  READ: "students.read",
+  UPDATE: "students.update",
+  CREATE: "students.create",
+  ARCHIVE: "students.archive",
+  RESTORE: "students.restore",
+  DELETE: "students.delete",
   READ_PROFILE: "students.read.profile",
   READ_STUDENT: "student.read.student",
 } as const;
