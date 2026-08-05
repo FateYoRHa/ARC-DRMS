@@ -6,4 +6,6 @@ export const roles = {
   CASHIER: "cashier",
   FACULTY: "faculty",
   STUDENT: "student",
-};
+} as const;
+
+export type Roles = (typeof roles)[keyof typeof roles];

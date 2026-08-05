@@ -1,24 +1,34 @@
 import { roles } from "./roles";
 import * as permissions from "./permissions/index.permissions";
+import type { Roles } from "./roles";
+import type { Permission } from "./permissions/index.permissions";
 
-export const role_permissions = {
+export const role_permissions: Record<Roles, readonly Permission[]> = {
+  [roles.SUPER_ADMIN]: [
+    // SUPER_ADMIN should inherit all admin permissions by default.
+    ...permissions.studentPermissions,
+    ...permissions.admissionPermissions,
+    ...permissions.recordPermissions,
+    ...permissions.dashboardPermissions,
+    ...permissions.reportPermissions,
+  ],
   [roles.ADMIN]: [
     // students
-    permissions.studentPermissions,
+    ...permissions.studentPermissions,
     // admissions
-    permissions.admissionPermissions,
+    ...permissions.admissionPermissions,
     // records
-    permissions.recordPermissions,
+    ...permissions.recordPermissions,
     // dashboard
-    permissions.dashboardPermissions,
+    ...permissions.dashboardPermissions,
     // reports
-    permissions.reportPermissions,
+    ...permissions.reportPermissions,
   ],
   [roles.REGISTRAR]: [
     // students
-    permissions.studentPermissions,
+    ...permissions.studentPermissions,
     // admissions (enrollment)
-    permissions.admissionPermissions,
+    ...permissions.admissionPermissions,
     // records
     permissions.records.READ,
     permissions.records.CREATE,
@@ -67,5 +77,3 @@ export const role_permissions = {
     permissions.admissions.READ_ADMISSION,
   ],
 };
-
-export type Permissions = typeof role_permissions;
