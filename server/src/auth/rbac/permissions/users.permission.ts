@@ -5,4 +5,5 @@ export const users = {
   ARCHIVE: "users.archive",
   RESTORE: "users.restore",
   DELETE: "users.delete",
+  MANAGE: "users.manage",
 };

@@ -6,3 +6,4 @@ export * from "./payment.permissions";
 export * from "./users.permission";
 export * from "./record.permissions";
 export * from "./dashboard.permissions";
+export * from "./roles.permissions"

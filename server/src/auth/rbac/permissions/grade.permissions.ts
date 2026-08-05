@@ -1,5 +1,6 @@
 export const grades = {
   READ: "grades.read",
+  VIEW_GRADE: "grades.view.grade",
   UPDATE: "grades.update",
   CREATE: "grades.create",
   ARCHIVE: "grades.archive",

@@ -1,9 +1,6 @@
 export const reports = {
   READ: "reports.read",
-  UPDATE: "reports.update",
-  CREATE: "reports.create",
-  ARCHIVE: "reports.archive",
-  RESTORE: "reports.restore",
-  DELETE: "reports.delete",
   GENERATE: "reports.generate",
+  VIEW_PAYMENT: "reports.view.payment.report",
+  GENERATE_PAYMENT: "reports.generate.payment.report",
 };
