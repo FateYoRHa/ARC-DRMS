@@ -1,6 +1,6 @@
 export const reports = {
   READ: "reports.read",
   GENERATE: "reports.generate",
-  VIEW_PAYMENT: "reports.view.payment.report",
+  READ_PAYMENT: "reports.view.read.payment",
   GENERATE_PAYMENT: "reports.generate.payment.report",
 };

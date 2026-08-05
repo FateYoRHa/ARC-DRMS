@@ -2,15 +2,6 @@ import { roles } from "./roles";
 import * as permissions from "./permissions/index.permissions";
 
 export const role_permissions = {
-  [roles.SUPER_ADMIN]: [
-    permissions.users,
-    permissions.dashboard,
-    permissions.students,
-    permissions.grades,
-    permissions.payments,
-    permissions.reports,
-    permissions.admissions,
-  ],
   [roles.ADMIN]: [
     permissions.students,
     permissions.admissions,
@@ -59,11 +50,11 @@ export const role_permissions = {
     permissions.students.READ,
     // reports
     permissions.reports.GENERATE_PAYMENT,
-    permissions.reports.VIEW_PAYMENT,
+    permissions.reports.READ_PAYMENT,
   ],
   [roles.FACULTY]: [
     // students
-    permissions.students.VIEW_STUDENT,
+    permissions.students.READ_PROFILE,
     // gradeds
     permissions.grades.READ,
     permissions.grades.CREATE,
@@ -71,9 +62,9 @@ export const role_permissions = {
   ],
   [roles.STUDENT]: [
     // student
-    permissions.students.VIEW_PROFILE,
+    permissions.students.READ_PROFILE,
     // grades
-    permissions.grades.VIEW_GRADE,
+    permissions.grades.READ_OWN,
     // admission
     permissions.admissions.VIEW_ADMISSION,
   ],
