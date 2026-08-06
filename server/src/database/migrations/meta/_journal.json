@@ -64,6 +64,13 @@
       "when": 1785885395553,
       "tag": "0008_orange_zaladane",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1786002671536,
+      "tag": "0009_free_captain_stacy",
+      "breakpoints": true
     }
   ]
 }
