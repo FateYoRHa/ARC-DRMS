@@ -1,0 +1,1 @@
+ALTER TABLE "admissions" ADD COLUMN "nationality" text NOT NULL;
