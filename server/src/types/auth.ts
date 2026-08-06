@@ -1,14 +1,15 @@
 import { UUID } from "crypto";
 import { User } from "../database/schema";
+import { Roles } from "../auth/rbac/roles";
 export interface AuthenticatedUser {
   id: number;
-  role: User["role"];
+  role: Roles;
   sessionId: string;
 }
 
 export interface AccessTokenPayload {
   id: number;
-  role: User["role"];
+  role: Roles;
   session_id: UUID;
   token_version: number;
 }
