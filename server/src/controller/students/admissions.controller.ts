@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 import {
-  createAdmissionSchema,
-  updateAdmissionSchema,
   CreateAdmissionInput,
   UpdateAdmissionInput,
 } from "../../validators/api/admission.validator";
