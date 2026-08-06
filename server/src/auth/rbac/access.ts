@@ -12,3 +12,7 @@ export function hasPermission(role: Roles, permission: Permission) {
 export function hasRole(role: Roles, required: Roles) {
   return role === required;
 }
+
+export function hasAnyRole(role: Roles, required: Roles[]) {
+  return required.includes(role);
+}
