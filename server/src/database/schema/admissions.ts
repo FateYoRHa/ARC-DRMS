@@ -46,6 +46,7 @@ export const admissions = pgTable("admissions", {
   province: text("province").notNull(),
   zip_code: integer("zip_code").notNull(),
   country: text("country").notNull(),
+  nationality: text("nationality").notNull(),
   previous_school: text("previous_school"),
   year_graduated: integer("year_graduated").notNull(),
   status: status("status").default("pending"),
