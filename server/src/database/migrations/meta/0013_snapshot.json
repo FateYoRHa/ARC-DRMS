@@ -1,5 +1,5 @@
 {
-  "id": "8e4f8e97-a20c-45ef-9666-1f3f4013c3a3",
+  "id": "0187af50-970e-4378-9092-f943dd444c10",
   "prevId": "f622be14-dd15-451d-a6a2-4e32fe7bb6a2",
   "version": "7",
   "dialect": "postgresql",
@@ -227,7 +227,7 @@
           "name": "student_id",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "birth_date": {
           "name": "birth_date",
@@ -562,9 +562,7 @@
         "for_id",
         "for_approval",
         "for_encoding",
-        "for_registration",
-        "registered",
-        "rejected"
+        "registered"
       ]
     },
     "public.roles": {
