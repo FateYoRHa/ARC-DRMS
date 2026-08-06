@@ -1,10 +1,16 @@
 import {
   pgTable,
+  pgEnum,
   serial,
   varchar,
   integer,
+  text,
   timestamp,
+  boolean,
+  date,
 } from "drizzle-orm/pg-core";
+
+export const sexes = pgEnum("sexes", ["male", "female"]);
 
 export const students = pgTable("students", {
   id: serial("id").primaryKey(),
@@ -12,6 +18,22 @@ export const students = pgTable("students", {
   first_name: varchar("first_name").notNull(),
   middle_name: varchar("middle_name").notNull(),
   last_name: varchar("last_name").notNull(),
-  student_id: integer("student_id").unique(),
+  student_id: varchar("student_id").unique(),
+  birth_date: date("birth_date").notNull(),
+  sex: sexes("sex").notNull(),
+  email: varchar("email").notNull(),
+  phone_number: varchar("phone_number").notNull(),
+  guardian: text("guardian").notNull(),
+  guadian_phone_number: varchar("guadian_phone_number").notNull(),
+  house_number: varchar("house_number"),
+  street: varchar("street").notNull(),
+  barangay: text("barangay").notNull(),
+  city: text("city").notNull(),
+  province: text("province").notNull(),
+  zip_code: integer("zip_code").notNull(),
+  country: text("country").notNull(),
+  nationality: text("nationality").notNull(),
+  isActive: boolean("isActive").default(true),
   createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
