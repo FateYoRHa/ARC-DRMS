@@ -7,6 +7,7 @@ import {
   text,
   timestamp,
   boolean,
+  date,
 } from "drizzle-orm/pg-core";
 
 export const entrance_status = pgEnum("entrance_status", [
@@ -21,6 +22,7 @@ export const status = pgEnum("status", [
   "for_encoding",
   "registered",
 ]);
+export const sexes = pgEnum("sexes", ["male", "female"]);
 
 export const admissions = pgTable("admissions", {
   id: serial("id").primaryKey(),
@@ -31,8 +33,12 @@ export const admissions = pgTable("admissions", {
   first_name: varchar("first_name").notNull(),
   middle_name: varchar("middle_name").notNull(),
   last_name: varchar("last_name").notNull(),
+  birth_date: date("birth_date").notNull(),
+  sex: sexes("sex").notNull(),
   email: varchar("email").notNull(),
   phone_number: varchar("phone_number").notNull(),
+  guardian: text("guardian").notNull(),
+  guadian_phone_number: varchar("guadian_phone_number").notNull(),
   house_number: varchar("house_number"),
   street: varchar("street").notNull(),
   barangay: text("barangay").notNull(),

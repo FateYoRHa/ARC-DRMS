@@ -23,13 +23,6 @@ export async function updateStudentAdmissionService(
   student: UpdateAdmissionInput,
   application_id: number,
 ) {
-  // const emailExists = await db
-  //   .select({ email: admissions.email })
-  //   .from(admissions)
-  //   .where(eq(admissions.email, email));
-  // if (emailExists.length > 0) {
-  //   throw new AppError(409, "Email already exists");
-  // }
   return await db
     .update(admissions)
     .set(student)
