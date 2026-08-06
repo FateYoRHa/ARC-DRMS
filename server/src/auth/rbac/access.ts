@@ -9,6 +9,12 @@ export function hasPermission(role: Roles, permission: Permission) {
   );
 }
 
+export function hasPermissions(role: Roles, permissions: Permission[]) {
+  const rolePermissions = role_permissions[role] as readonly Permission[];
+
+  return permissions.every((permission) => rolePermissions.includes(permission));
+}
+
 export function hasRole(role: Roles, required: Roles) {
   return role === required;
 }
