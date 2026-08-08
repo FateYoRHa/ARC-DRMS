@@ -20,7 +20,6 @@ const phoneNumberSchema = z
   });
 
 const createAdmissionFieldSchema = {
-  application_id: z.number().int().positive(),
   first_name: z.string().max(15),
   middle_name: z.string().max(15),
   last_name: z.string().max(15),
