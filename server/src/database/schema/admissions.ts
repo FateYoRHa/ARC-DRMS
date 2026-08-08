@@ -28,7 +28,7 @@ export const sexes = pgEnum("sexes", ["male", "female"]);
 
 export const admissions = pgTable("admissions", {
   id: serial("id").primaryKey(),
-  application_id: integer("application_id").unique(),
+  application_id: varchar("application_id").unique(),
   entrance_status: entrance_status("entrance_status").default(
     "incoming_first_year",
   ),

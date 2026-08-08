@@ -1,0 +1,1 @@
+ALTER TABLE "admissions" ALTER COLUMN "application_id" SET DATA TYPE varchar;
