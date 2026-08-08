@@ -92,6 +92,13 @@
       "when": 1786006031944,
       "tag": "0012_free_mac_gargan",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1786153768977,
+      "tag": "0013_flashy_rogue",
+      "breakpoints": true
     }
   ]
 }

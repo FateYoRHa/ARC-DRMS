@@ -20,7 +20,9 @@ export const status = pgEnum("status", [
   "for_id",
   "for_approval",
   "for_encoding",
+  "for_registration",
   "registered",
+  "rejected",
 ]);
 export const sexes = pgEnum("sexes", ["male", "female"]);
 
