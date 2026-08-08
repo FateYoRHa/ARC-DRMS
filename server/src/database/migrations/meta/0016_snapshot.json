@@ -1,6 +1,6 @@
 {
-  "id": "0187af50-970e-4378-9092-f943dd444c10",
-  "prevId": "f622be14-dd15-451d-a6a2-4e32fe7bb6a2",
+  "id": "caf5999b-2011-4fb7-b2a9-37acd718e76c",
+  "prevId": "b33dd4a7-625b-4c27-bd85-5f24289f6e65",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -16,7 +16,7 @@
         },
         "application_id": {
           "name": "application_id",
-          "type": "integer",
+          "type": "varchar",
           "primaryKey": false,
           "notNull": false
         },
@@ -185,6 +185,32 @@
           ]
         }
       },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.id_counters": {
+      "name": "id_counters",
+      "schema": "",
+      "columns": {
+        "year": {
+          "name": "year",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "last_number": {
+          "name": "last_number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
@@ -562,7 +588,9 @@
         "for_id",
         "for_approval",
         "for_encoding",
-        "registered"
+        "for_registration",
+        "registered",
+        "rejected"
       ]
     },
     "public.roles": {
