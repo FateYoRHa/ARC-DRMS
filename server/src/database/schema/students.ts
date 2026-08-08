@@ -19,7 +19,9 @@ export const students = pgTable("students", {
   middle_name: varchar("middle_name").notNull(),
   last_name: varchar("last_name").notNull(),
   student_id: varchar("student_id").unique().notNull(),
-  birth_date: date("birth_date").notNull(),
+  birth_date: date("birth_date", {
+    mode: "date",
+  }).notNull(),
   sex: sexes("sex").notNull(),
   email: varchar("email").notNull(),
   phone_number: varchar("phone_number").notNull(),

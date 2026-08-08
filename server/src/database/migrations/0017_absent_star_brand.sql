@@ -1,0 +1,1 @@
+ALTER TABLE "admissions" ALTER COLUMN "birth_date" SET NOT NULL;
