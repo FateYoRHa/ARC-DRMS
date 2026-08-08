@@ -21,36 +21,33 @@ export async function createStudentAdmissionService(student: NewAdmission) {
 
 export async function updateStudentAdmissionService(
   student: UpdateAdmissionInput,
-  application_id: number,
+  id: number,
 ) {
   return await db
     .update(admissions)
     .set(student)
-    .where(eq(admissions.application_id, application_id))
+    .where(eq(admissions.id, id))
     .returning();
 }
 
 export async function retriveAllStudentAdmissionsService() {
   return await db.select().from(admissions);
 }
-export async function retriveStudentAdmissionService(application_id: number) {
-  return await db
-    .select()
-    .from(admissions)
-    .where(eq(admissions.application_id, application_id));
+export async function retriveStudentAdmissionService(id: number) {
+  return await db.select().from(admissions).where(eq(admissions.id, id));
 }
-export async function archiveStudentAdmissionService(application_id: number) {
+export async function archiveStudentAdmissionService(id: number) {
   return await db
     .update(admissions)
     .set({ isActive: false, updatedAt: new Date() })
-    .where(eq(admissions.application_id, application_id))
+    .where(eq(admissions.id, id))
     .returning();
 }
 
-export async function restoreStudentAdmissionService(application_id: number) {
+export async function restoreStudentAdmissionService(id: number) {
   return await db
     .update(admissions)
     .set({ isActive: true, updatedAt: new Date() })
-    .where(eq(admissions.application_id, application_id))
+    .where(eq(admissions.id, id))
     .returning();
 }
