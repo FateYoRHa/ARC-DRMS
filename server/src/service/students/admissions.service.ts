@@ -1,12 +1,17 @@
 import { db } from "../../database/db";
 import { eq, sql } from "drizzle-orm";
-import { admissions, admissionIdCounters } from "../../database/schema";
+import {
+  admissions,
+  admissionIdCounters,
+  Admission,
+} from "../../database/schema";
 import { AppError } from "../../errors/AppError";
 
 import {
   NewAdmission,
   UpdateAdmissionInput,
 } from "../../validators/api/admission.validator";
+import { createStudentService } from "./students.service";
 
 export async function createStudentAdmissionService(student: NewAdmission) {
   const emailExists = await db
@@ -111,9 +116,45 @@ export async function encodeAdmissionService(id: number) {
     .returning();
 }
 export async function registerAdmissionService(id: number) {
+  const admission = await db
+    .select()
+    .from(admissions)
+    .where(eq(admissions.id, id))
+    .limit(1)
+    .then((rows) => rows[0]);
+  if (!admission) {
+    throw new AppError(404, "Admission not found.");
+  }
+  const student = admissionToStudent(admission);
+  await createStudentService(student);
+
   return await db
     .update(admissions)
     .set({ status: "registered" })
     .where(eq(admissions.id, id))
     .returning();
+}
+
+function admissionToStudent(admission: Admission) {
+  return {
+    application_id: admission.id,
+    student_id: String(admission.application_id),
+    first_name: admission.first_name,
+    middle_name: admission.middle_name,
+    last_name: admission.last_name,
+    birth_date: admission.birth_date,
+    sex: admission.sex,
+    email: admission.email,
+    phone_number: admission.phone_number,
+    guardian: admission.guardian,
+    guadian_phone_number: admission.guadian_phone_number,
+    house_number: admission.house_number,
+    street: admission.street,
+    barangay: admission.barangay,
+    city: admission.city,
+    province: admission.province,
+    zip_code: admission.zip_code,
+    country: admission.country,
+    nationality: admission.nationality,
+  };
 }
