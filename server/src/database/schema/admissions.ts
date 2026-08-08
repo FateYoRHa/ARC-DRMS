@@ -37,7 +37,7 @@ export const admissions = pgTable("admissions", {
   last_name: varchar("last_name").notNull(),
   birth_date: date("birth_date", {
     mode: "date",
-  }),
+  }).notNull(),
   sex: sexes("sex").notNull(),
   email: varchar("email").notNull(),
   phone_number: varchar("phone_number").notNull(),
@@ -58,3 +58,5 @@ export const admissions = pgTable("admissions", {
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updatedAt").defaultNow(),
 });
+
+export type Admission = typeof admissions.$inferSelect;
