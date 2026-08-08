@@ -10,7 +10,7 @@ import {
   date,
 } from "drizzle-orm/pg-core";
 
-export const sexes = pgEnum("sexes", ["male", "female"]);
+const sexes = pgEnum("sexes", ["male", "female"]);
 
 export const students = pgTable("students", {
   id: serial("id").primaryKey(),
