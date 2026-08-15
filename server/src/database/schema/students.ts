@@ -9,12 +9,19 @@ import {
   boolean,
   date,
 } from "drizzle-orm/pg-core";
+import { admissions } from "./admissions";
 
 const sexes = pgEnum("sexes", ["male", "female"]);
 
 export const students = pgTable("students", {
   id: serial("id").primaryKey(),
-  application_id: integer("application_id").unique(),
+  application_id: integer("application_id")
+    .references(() => admissions.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    })
+    .unique()
+    .notNull(),
   first_name: varchar("first_name").notNull(),
   middle_name: varchar("middle_name").notNull(),
   last_name: varchar("last_name").notNull(),
