@@ -40,3 +40,10 @@ export const year_level = pgEnum("year_level", [
   "5th Year",
   "6th Year",
 ]);
+
+export const class_status = pgEnum("class_status", [
+  "active",
+  "inactive",
+  "dropped",
+  "completed",
+]);
