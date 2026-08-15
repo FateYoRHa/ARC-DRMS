@@ -7,7 +7,7 @@ import {
   date,
   boolean,
 } from "drizzle-orm/pg-core";
-export const school_year = pgTable("school_year", {
+export const school_years = pgTable("school_years", {
   id: serial("id").primaryKey(),
   name: text("name").unique().notNull(),
   start_date: date("start_date").notNull(),
@@ -18,4 +18,4 @@ export const school_year = pgTable("school_year", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
-export type SchoolYear = typeof school_year.$inferSelect;
+export type SchoolYear = typeof school_years.$inferSelect;
