@@ -4,6 +4,8 @@ export * from "./schema/students/admissions";
 export * from "./schema/auth/user_sessions";
 export * from "./schema/id_counter";
 
+export * from "./schema/enrollment/enrollments";
+
 export * from "./schema/academic/programs";
 export * from "./schema/academic/schools";
 export * from "./schema/academic/curriculums";
