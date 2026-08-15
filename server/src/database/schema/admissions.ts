@@ -42,7 +42,7 @@ export const admissions = pgTable("admissions", {
   email: varchar("email").notNull(),
   phone_number: varchar("phone_number").notNull(),
   guardian: text("guardian").notNull(),
-  guadian_phone_number: varchar("guadian_phone_number").notNull(),
+  guardian_phone_number: varchar("guardian_phone_number").notNull(),
   house_number: varchar("house_number"),
   street: varchar("street").notNull(),
   barangay: text("barangay").notNull(),
@@ -56,7 +56,7 @@ export const admissions = pgTable("admissions", {
   status: status("status").default("pending"),
   isActive: boolean("isActive").default(true),
   createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updatedAt").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 export type Admission = typeof admissions.$inferSelect;
