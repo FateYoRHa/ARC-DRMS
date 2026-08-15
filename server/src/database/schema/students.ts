@@ -10,8 +10,7 @@ import {
   date,
 } from "drizzle-orm/pg-core";
 import { admissions } from "./admissions";
-
-const sexes = pgEnum("sexes", ["male", "female"]);
+import { sexes, student_status } from "./enums";
 
 export const students = pgTable("students", {
   id: serial("id").primaryKey(),
@@ -33,7 +32,7 @@ export const students = pgTable("students", {
   email: varchar("email").notNull(),
   phone_number: varchar("phone_number").notNull(),
   guardian: text("guardian").notNull(),
-  guadian_phone_number: varchar("guadian_phone_number").notNull(),
+  guardian_phone_number: varchar("guardian_phone_number").notNull(),
   house_number: varchar("house_number"),
   street: varchar("street").notNull(),
   barangay: text("barangay").notNull(),
@@ -42,6 +41,7 @@ export const students = pgTable("students", {
   zip_code: integer("zip_code").notNull(),
   country: text("country").notNull(),
   nationality: text("nationality").notNull(),
+  status: student_status("status").default("active"),
   isActive: boolean("isActive").default(true),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
