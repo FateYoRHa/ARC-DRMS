@@ -9,12 +9,18 @@ import {
   boolean,
   date,
 } from "drizzle-orm/pg-core";
-
-const sexes = pgEnum("sexes", ["male", "female"]);
+import { admissions } from "./admissions";
+import { sexes, student_status } from "./enums";
 
 export const students = pgTable("students", {
   id: serial("id").primaryKey(),
-  application_id: integer("application_id").unique(),
+  application_id: integer("application_id")
+    .references(() => admissions.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    })
+    .unique()
+    .notNull(),
   first_name: varchar("first_name").notNull(),
   middle_name: varchar("middle_name").notNull(),
   last_name: varchar("last_name").notNull(),
@@ -26,7 +32,7 @@ export const students = pgTable("students", {
   email: varchar("email").notNull(),
   phone_number: varchar("phone_number").notNull(),
   guardian: text("guardian").notNull(),
-  guadian_phone_number: varchar("guadian_phone_number").notNull(),
+  guardian_phone_number: varchar("guardian_phone_number").notNull(),
   house_number: varchar("house_number"),
   street: varchar("street").notNull(),
   barangay: text("barangay").notNull(),
@@ -35,6 +41,7 @@ export const students = pgTable("students", {
   zip_code: integer("zip_code").notNull(),
   country: text("country").notNull(),
   nationality: text("nationality").notNull(),
+  status: student_status("status").default("active"),
   isActive: boolean("isActive").default(true),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),

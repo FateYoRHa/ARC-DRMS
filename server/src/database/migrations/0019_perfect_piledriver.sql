@@ -1,0 +1,2 @@
+ALTER TABLE "students" ALTER COLUMN "application_id" SET NOT NULL;--> statement-breakpoint
+ALTER TABLE "students" ADD CONSTRAINT "students_application_id_admissions_id_fk" FOREIGN KEY ("application_id") REFERENCES "public"."admissions"("id") ON DELETE cascade ON UPDATE cascade;

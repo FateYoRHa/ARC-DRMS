@@ -1,6 +1,5 @@
 import {
   pgTable,
-  pgEnum,
   serial,
   varchar,
   integer,
@@ -9,22 +8,7 @@ import {
   boolean,
   date,
 } from "drizzle-orm/pg-core";
-
-export const entrance_status = pgEnum("entrance_status", [
-  "incoming_first_year",
-  "transferee",
-  "returning_student",
-]);
-export const status = pgEnum("status", [
-  "pending",
-  "for_id",
-  "for_approval",
-  "for_encoding",
-  "for_registration",
-  "registered",
-  "rejected",
-]);
-export const sexes = pgEnum("sexes", ["male", "female"]);
+import { entrance_status, admission_status, sexes } from "./enums";
 
 export const admissions = pgTable("admissions", {
   id: serial("id").primaryKey(),
@@ -53,7 +37,7 @@ export const admissions = pgTable("admissions", {
   nationality: text("nationality").notNull(),
   previous_school: text("previous_school"),
   year_graduated: integer("year_graduated").notNull(),
-  status: status("status").default("pending"),
+  status: admission_status("status").default("pending"),
   isActive: boolean("isActive").default(true),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
