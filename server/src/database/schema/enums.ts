@@ -47,3 +47,9 @@ export const class_status = pgEnum("class_status", [
   "dropped",
   "completed",
 ]);
+
+export const enrollment_class_status = pgEnum("enrollment_class_status", [
+  "enrolled",
+  "dropped",
+  "completed",
+]);

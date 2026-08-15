@@ -5,6 +5,7 @@ export * from "./schema/auth/user_sessions";
 export * from "./schema/id_counter";
 
 export * from "./schema/enrollment/enrollments";
+export * from "./schema/enrollment/enrollment_classes";
 
 export * from "./schema/academic/programs";
 export * from "./schema/academic/schools";
