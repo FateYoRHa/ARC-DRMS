@@ -6,7 +6,7 @@ export * from "./schema/id_counter";
 
 export * from "./schema/academic/programs";
 export * from "./schema/academic/schools";
-export * from "./schema/academic/curriculum";
+export * from "./schema/academic/curriculums";
 export * from "./schema/academic/school_years";
 export * from "./schema/academic/curriculum_programs";
 export * from "./schema/academic/subjects";
