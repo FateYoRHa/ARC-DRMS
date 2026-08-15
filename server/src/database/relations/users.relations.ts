@@ -1,7 +1,7 @@
 import { relations } from "drizzle-orm";
 
-import { users } from "../schema/users";
-import { user_sessions } from "../schema/user_sessions";
+import { users } from "../schema/auth/users";
+import { user_sessions } from "../schema/auth/user_sessions";
 
 export const userSessionsRelations = relations(user_sessions, ({ one }) => ({
   user: one(users, {
