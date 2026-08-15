@@ -34,7 +34,7 @@ const createAdmissionFieldSchema = {
     .trim()
     .min(2, "Guardian name is required.")
     .max(80, "Guardian name is too long."),
-  guadian_phone_number: phoneNumberSchema,
+  guardian_phone_number: phoneNumberSchema,
   house_number: z.string().trim().max(20, "House number is too long.").optional(),
   street: z
     .string()
@@ -106,7 +106,7 @@ const updateAdmissionFieldSchema = {
     .min(2, "Guardian name is required.")
     .max(80, "Guardian name is too long.")
     .optional(),
-  guadian_phone_number: phoneNumberSchema.optional(),
+  guardian_phone_number: phoneNumberSchema.optional(),
   house_number: z.string().trim().max(20, "House number is too long.").optional(),
   nationality: z
     .string()
