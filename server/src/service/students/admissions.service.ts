@@ -147,7 +147,7 @@ function admissionToStudent(admission: Admission) {
     email: admission.email,
     phone_number: admission.phone_number,
     guardian: admission.guardian,
-    guadian_phone_number: admission.guadian_phone_number,
+    guardian_phone_number: admission.guardian_phone_number,
     house_number: admission.house_number,
     street: admission.street,
     barangay: admission.barangay,
