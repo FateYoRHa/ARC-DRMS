@@ -9,7 +9,7 @@ import {
 import { school_years } from "./school_years";
 import { schools } from "./schools";
 
-export const curriculum = pgTable("curriculum", {
+export const curriculums = pgTable("curriculums", {
   id: serial("id").primaryKey(),
   program_id: integer("program_id").notNull(),
   school_id: integer("school_id").references(() => schools.id).notNull(),
@@ -23,4 +23,4 @@ export const curriculum = pgTable("curriculum", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
-export type Curriculum = typeof curriculum.$inferSelect;
+export type Curriculum = typeof curriculums.$inferSelect;

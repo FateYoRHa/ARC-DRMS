@@ -1,4 +1,4 @@
-import { curriculum } from "./curriculum";
+import { curriculums } from "./curriculums";
 import { subjects } from "./subjects";
 import { semester, year_level } from "../enums";
 import {
@@ -14,7 +14,7 @@ export const curriculum_programs = pgTable("curriculum_programs", {
   id: serial("id").primaryKey(),
   name: varchar("name").notNull(),
   curriculum_id: integer("curriculum_id")
-    .references(() => curriculum.id)
+    .references(() => curriculums.id)
     .notNull(),
   subject_id: integer("subject_id")
     .references(() => subjects.id)
