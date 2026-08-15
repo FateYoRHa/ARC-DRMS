@@ -21,3 +21,11 @@ export const student_status = pgEnum("student_status", [
   "graduated",
   "transferred",
 ]);
+export const enrollment_status = pgEnum("enrollment_status", [
+  "approved",
+  "enrolled",
+  "dropped",
+  "cancelled",
+  "dropped_by_student",
+  "dropped_by_school",
+]);
