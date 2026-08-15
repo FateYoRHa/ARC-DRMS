@@ -3,6 +3,8 @@ import * as studentRoutes from "../controller/students/students.controller";
 
 const router = express.Router();
 
-router.put("/");
+router.put("/:id", studentRoutes.updateStudent);
+router.get("/", studentRoutes.retrieveStudents);
+router.get("/:id", studentRoutes.retrieveStudent);
 
 export default router;

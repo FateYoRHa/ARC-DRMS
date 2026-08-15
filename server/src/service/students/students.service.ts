@@ -23,3 +23,11 @@ export async function updateStudentService(
     .where(eq(students.id, id))
     .returning();
 }
+
+export async function retrieveStudentsService() {
+  return await db.select().from(students);
+}
+
+export async function retrieveStudentService(id: number) {
+  return await db.select().from(students).where(eq(students.id, id));
+}
