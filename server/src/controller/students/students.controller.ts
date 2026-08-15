@@ -11,3 +11,14 @@ export async function updateStudent(req: UpdateStudentRequest, res: Response) {
 
   return res.status(200).json(student);
 }
+export async function retrieveStudents(req: Request, res: Response) {
+  const students = await studentService.retrieveStudentsService();
+  return res.status(200).json(students);
+}
+
+export async function retrieveStudent(req: Request, res: Response) {
+  const student = await studentService.retrieveStudentService(
+    Number(req.params.id),
+  );
+  return res.status(200).json(student);
+}
