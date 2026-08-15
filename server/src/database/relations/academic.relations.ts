@@ -1,6 +1,7 @@
 import { relations } from "drizzle-orm";
 
 import { programs, schools, curriculum, school_years } from "../schema";
+import { curriculum_programs } from "../schema/academic/curriculum_programs";
 
 export const programsRelations = relations(programs, ({ one }) => ({
   program_school: one(schools, {
@@ -18,7 +19,7 @@ export const schoolsRelations = relations(schools, ({ many }) => ({
 // ------------------
 export const curriculumSchoolRelations = relations(curriculum, ({ one }) => ({
   curriculum_school: one(schools, {
-    fields: [curriculum.school],
+    fields: [curriculum.school_id],
     references: [schools.id],
   }),
 }));
@@ -32,4 +33,8 @@ export const curriculumYearRelations = relations(curriculum, ({ one }) => ({
 
 export const schoolYearRelations = relations(school_years, ({ many }) => ({
   curriculums_year: many(curriculum),
+}));
+
+export const curriculumSubjectRelations = relations(curriculum, ({ many }) => ({
+  curriculum_subjects: many(curriculum_programs),
 }));
