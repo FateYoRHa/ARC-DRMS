@@ -12,13 +12,13 @@ import { schools } from "./schools";
 export const curriculum = pgTable("curriculum", {
   id: serial("id").primaryKey(),
   program_id: integer("program_id").notNull(),
-  school: integer("school").references(() => schools.id).notNull(),
+  school_id: integer("school_id").references(() => schools.id).notNull(),
   name: varchar("name").notNull(),
   effective_school_year_id: integer("effective_school_year_id")
     .references(() => school_years.id)
     .notNull(),
   version: integer("version").default(1),
-  isActive: boolean("isActive").default(true),
+  isActive: boolean("is_active").default(true),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });

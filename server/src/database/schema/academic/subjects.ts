@@ -15,7 +15,7 @@ export const subjects = pgTable("subjects", {
   description: text("description"),
   lecture_units: integer("lecture_units").notNull(),
   lab_units: integer("lab_units").default(0),
-  isActive: boolean("isActive").default(true),
+  isActive: boolean("is_active").default(true),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
