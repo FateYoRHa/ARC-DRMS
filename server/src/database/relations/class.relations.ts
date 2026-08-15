@@ -1,5 +1,11 @@
 import { relations } from "drizzle-orm";
-import { teachers, class_schedules, classes, sections } from "../schema";
+import {
+  teachers,
+  class_schedules,
+  classes,
+  sections,
+  enrollment_classes,
+} from "../schema";
 
 // -----------------------------------
 // CLASSES RELATIONS
@@ -18,6 +24,10 @@ export const classRelations = relations(classes, ({ one }) => ({
   class_section: one(sections, {
     fields: [classes.section_id],
     references: [sections.id],
+  }),
+  enrollment_class: one(enrollment_classes, {
+    fields: [classes.id],
+    references: [enrollment_classes.class_id],
   }),
 }));
 
