@@ -6,7 +6,7 @@ import {
   timestamp,
   pgEnum,
 } from "drizzle-orm/pg-core";
-import { roles } from "../../auth/rbac/roles";
+import { roles } from "../../../auth/rbac/roles";
 export const role = pgEnum(
   "roles",
   Object.values(roles) as [string, ...string[]],

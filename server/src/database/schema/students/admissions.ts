@@ -1,6 +1,5 @@
 import {
   pgTable,
-  pgEnum,
   serial,
   varchar,
   integer,
@@ -9,22 +8,17 @@ import {
   boolean,
   date,
 } from "drizzle-orm/pg-core";
-import { admissions } from "./admissions";
-import { sexes, student_status } from "./enums";
+import { entrance_status, admission_status, sexes } from "../enums";
 
-export const students = pgTable("students", {
+export const admissions = pgTable("admissions", {
   id: serial("id").primaryKey(),
-  application_id: integer("application_id")
-    .references(() => admissions.id, {
-      onDelete: "cascade",
-      onUpdate: "cascade",
-    })
-    .unique()
-    .notNull(),
+  application_id: varchar("application_id").unique(),
+  entrance_status: entrance_status("entrance_status").default(
+    "incoming_first_year",
+  ),
   first_name: varchar("first_name").notNull(),
   middle_name: varchar("middle_name").notNull(),
   last_name: varchar("last_name").notNull(),
-  student_id: varchar("student_id").unique().notNull(),
   birth_date: date("birth_date", {
     mode: "date",
   }).notNull(),
@@ -41,8 +35,12 @@ export const students = pgTable("students", {
   zip_code: integer("zip_code").notNull(),
   country: text("country").notNull(),
   nationality: text("nationality").notNull(),
-  status: student_status("status").default("active"),
+  previous_school: text("previous_school"),
+  year_graduated: integer("year_graduated").notNull(),
+  status: admission_status("status").default("pending"),
   isActive: boolean("isActive").default(true),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
+
+export type Admission = typeof admissions.$inferSelect;

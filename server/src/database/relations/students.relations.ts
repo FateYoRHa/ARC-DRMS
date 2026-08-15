@@ -1,7 +1,7 @@
 import { relations } from "drizzle-orm";
 
-import { admissions } from "../schema/admissions";
-import { students } from "../schema/students";
+import { admissions } from "../schema/students/admissions";
+import { students } from "../schema/students/students";
 
 export const admissionsRelations = relations(admissions, ({ one }) => ({
   student: one(students, {
