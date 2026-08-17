@@ -1,5 +1,5 @@
 import express from "express";
-import * as admissionRoutes from "../controller/students/admissions.controller";
+import * as admissionRoutes from "../controller/index.controllers";
 import { validate } from "../middleware/validate";
 import {
   newAdmissionSchema,
