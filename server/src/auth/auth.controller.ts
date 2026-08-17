@@ -3,7 +3,6 @@ import { Request, Response } from "express";
 import * as authService from "./auth.service";
 import { RegisterUserInput } from "./validators/auth.api";
 import { AppError } from "../errors/AppError";
-import env from "../config/env";
 import { refreshCookieOptions } from "../config/cookies";
 type RegisterUserRequest = Request<{}, {}, RegisterUserInput>;
 
