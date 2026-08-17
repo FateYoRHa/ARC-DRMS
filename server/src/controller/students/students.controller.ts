@@ -1,4 +1,4 @@
-import * as studentService from "../../service/students/students.service";
+import * as studentService from "../../service/index.services";
 import { Request, Response } from "express";
 import { UpdateStudentInput } from "../../validators/api/student.validator";
 

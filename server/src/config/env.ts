@@ -15,6 +15,8 @@ const env = cleanEnv(process.env, {
   }),
   NODE_ENV: str(),
   COOKIE_SECRET: str(),
+  INITIAL_ADMIN_EMAIL: str(),
+  INITIAL_ADMIN_PASSWORD: str(),
 });
 
 export default env;

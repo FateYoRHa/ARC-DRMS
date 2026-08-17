@@ -1,7 +1,7 @@
 import z from "zod";
 
 import { InferInsertModel } from "drizzle-orm";
-import { users } from "../../database/schema/users";
+import { users } from "../../database/schema/auth/users";
 
 export const registerSchema = z
   .object({
@@ -22,12 +22,13 @@ export const registerSchema = z
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
     path: ["confirmPassword"], // Highlights the confirm field on error
-  });
+  })
+  .strict();
 
-  export const loginSchema = z.object({
-    email: z.string().email("Invalid email address"),
-    password: z.string().min(1, "Password is required"),
-  });
+export const loginSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(1, "Password is required"),
+});
 
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type RegisterUserInput = InferInsertModel<typeof users>;
