@@ -7,6 +7,7 @@ import env from "./config/env";
 import authRoutes from "./auth/auth.route";
 import admissionRoutes from "./routes/admissions.route";
 import studentRoutes from "./routes/students.route";
+import userRoutes from "./routes/users.route";
 
 import { errorMiddleware } from "./middleware/global.error.middleware";
 import { notFoundMiddleware } from "./middleware/notFound.middleware";
@@ -30,7 +31,10 @@ app.use(cookieParser(env.COOKIE_SECRET));
 // --------------------
 
 // AUTH ROUTES
-app.use("/users", authRoutes);
+app.use("/auth", authRoutes);
+
+// USER ROUTES
+app.use("/users", userRoutes);
 
 // ADMISSIONS ROUTES
 app.use("/admissions", admissionRoutes);
