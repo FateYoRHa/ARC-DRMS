@@ -1,5 +1,5 @@
 import { createInsertSchema, createUpdateSchema } from "drizzle-zod";
-import { users } from "../../database/schema/users";
+import { users } from "../../database/schema/auth/users";
 
 // THESE Generate Zod schemas from the database schema.
 export const userInsertSchema = createInsertSchema(users);

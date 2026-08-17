@@ -1,7 +1,7 @@
 import z from "zod";
 
 import { InferInsertModel } from "drizzle-orm";
-import { users } from "../../database/schema/users";
+import { users } from "../../database/schema/auth/users";
 
 export const registerSchema = z
   .object({
