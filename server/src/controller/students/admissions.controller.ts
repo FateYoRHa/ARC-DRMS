@@ -3,7 +3,7 @@ import {
   CreateAdmissionInput,
   UpdateAdmissionInput,
 } from "../../validators/api/admission.validator";
-import * as admissionServices from "../../service/students/admissions.service";
+import * as admissionServices from "../../service/index.services";
 
 type CreateAdmissionRequest = Request<{}, {}, CreateAdmissionInput>;
 type UpdateAdmissionRequest = Request<{ id: string }, {}, UpdateAdmissionInput>;
