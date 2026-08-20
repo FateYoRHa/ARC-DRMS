@@ -9,6 +9,7 @@ import admissionRoutes from "./routes/admissions.route";
 import studentRoutes from "./routes/students.route";
 import userRoutes from "./routes/users.route";
 import teacherRoutes from "./routes/teachers.route";
+import programRoutes from "./routes/academic.routes";
 
 import { errorMiddleware } from "./middleware/global.error.middleware";
 import { notFoundMiddleware } from "./middleware/notFound.middleware";
@@ -45,6 +46,9 @@ app.use("/students", studentRoutes);
 
 // TEACHER ROUTES
 app.use("/teachers", teacherRoutes);
+
+// ACADEMIC ROUTES
+app.use("/academic", programRoutes);
 
 // --------------------
 //! ERROR MIDDLEWARES
