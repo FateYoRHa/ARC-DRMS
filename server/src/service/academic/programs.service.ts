@@ -31,3 +31,11 @@ export async function retrieveProgramByIdService(id: number) {
   const program = await db.select().from(programs).where(eq(programs.id, id));
   return program[0];
 }
+
+export async function archiveProgramService(id: number) {
+  await db.update(programs).set({ isActive: false }).where(eq(programs.id, id));
+}
+
+export async function restoreProgramService(id: number) {
+  await db.update(programs).set({ isActive: true }).where(eq(programs.id, id));
+}

@@ -33,3 +33,15 @@ export async function retrieveProgramById(req: Request, res: Response) {
   );
   res.status(200).json(program);
 }
+
+export async function archiveProgram(req: Request, res: Response) {
+  const programId = Number(req.params.id);
+  await programServices.archiveProgramService(programId);
+  res.status(200).json({ message: "Program archived." });
+}
+
+export async function restoreProgram(req: Request, res: Response) {
+  const programId = Number(req.params.id);
+  await programServices.restoreProgramService(programId);
+  res.status(200).json({ message: "Program restored." });
+}
