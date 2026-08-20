@@ -21,3 +21,15 @@ export async function updateProgram(req: UpdateProgramRequest, res: Response) {
   );
   res.status(200).json(updatedProgram);
 }
+
+export async function retrieveAllPrograms(req: Request, res: Response) {
+  const programs = await programServices.retrieveAllProgramsService();
+  res.status(200).json(programs);
+}
+
+export async function retrieveProgramById(req: Request, res: Response) {
+  const program = await programServices.retrieveProgramByIdService(
+    Number(req.params.id),
+  );
+  res.status(200).json(program);
+}

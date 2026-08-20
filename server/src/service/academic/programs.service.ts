@@ -22,3 +22,12 @@ export async function updateProgramService(
     .returning();
   return updatedProgram[0];
 }
+
+export async function retrieveAllProgramsService() {
+  return await db.select().from(programs);
+}
+
+export async function retrieveProgramByIdService(id: number) {
+  const program = await db.select().from(programs).where(eq(programs.id, id));
+  return program[0];
+}
