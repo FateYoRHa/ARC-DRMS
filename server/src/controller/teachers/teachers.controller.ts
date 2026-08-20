@@ -32,3 +32,19 @@ export async function updateTeacher(req: UpdateTeacherRequest, res: Response) {
   );
   res.status(200).json(updatedTeacher);
 }
+
+export async function archiveTeacher(req: Request, res: Response) {
+  const { id } = req.params;
+  const archivedTeacher = await teachersService.archiveTeacherService(
+    Number(id),
+  );
+  res.status(200).json(archivedTeacher);
+}
+
+export async function restoreTeacher(req: Request, res: Response) {
+  const { id } = req.params;
+  const restoredTeacher = await teachersService.restoreTeacherService(
+    Number(id),
+  );
+  res.status(200).json(restoredTeacher);
+}

@@ -15,7 +15,6 @@ export async function retrieveTeacherByIdService(id: number) {
   return await db.select().from(teachers).where(eq(teachers.id, id));
 }
 
-
 export async function createTeacherService(teacher: NewTeacher) {
   return await db.transaction(async (tx) => {
     const year = new Date().getFullYear();
@@ -56,4 +55,18 @@ export async function updateTeacherService(
   teacher: UpdateTeacherInput,
 ) {
   return await db.update(teachers).set(teacher).where(eq(teachers.id, id));
+}
+
+export async function archiveTeacherService(id: number) {
+  return await db
+    .update(teachers)
+    .set({ isActive: false })
+    .where(eq(teachers.id, id));
+}
+
+export async function restoreTeacherService(id: number) {
+  return await db
+    .update(teachers)
+    .set({ isActive: true })
+    .where(eq(teachers.id, id));
 }
