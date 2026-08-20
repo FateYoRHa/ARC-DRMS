@@ -1,7 +1,10 @@
 import { db } from "../../database/db";
 import { teachers, teacherIdCounters } from "../../database/schema";
 import { AppError } from "../../errors/AppError";
-import type { NewTeacher } from "../../validators/api/teachers.validator";
+import type {
+  NewTeacher,
+  UpdateTeacherInput,
+} from "../../validators/api/teachers.validator";
 import { eq, sql } from "drizzle-orm";
 
 export async function retrieveTeachersService() {
@@ -11,6 +14,7 @@ export async function retrieveTeachersService() {
 export async function retrieveTeacherByIdService(id: number) {
   return await db.select().from(teachers).where(eq(teachers.id, id));
 }
+
 
 export async function createTeacherService(teacher: NewTeacher) {
   return await db.transaction(async (tx) => {
@@ -45,4 +49,11 @@ export async function createTeacherService(teacher: NewTeacher) {
       .returning();
     return newTeacher;
   });
+}
+
+export async function updateTeacherService(
+  id: number,
+  teacher: UpdateTeacherInput,
+) {
+  return await db.update(teachers).set(teacher).where(eq(teachers.id, id));
 }
