@@ -32,3 +32,19 @@ export async function updateSchoolService(
     .where(eq(schools.id, id));
   return updatedSchool;
 }
+
+export async function archiveSchoolService(id: number) {
+  const archivedSchool = await db
+    .update(schools)
+    .set({ isActive: false })
+    .where(eq(schools.id, id));
+  return archivedSchool;
+}
+
+export async function restoreSchoolService(id: number) {
+  const restoredSchool = await db
+    .update(schools)
+    .set({ isActive: true })
+    .where(eq(schools.id, id));
+  return restoredSchool;
+}

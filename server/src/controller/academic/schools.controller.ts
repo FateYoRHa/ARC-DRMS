@@ -32,3 +32,17 @@ export async function updateSchool(req: UpdateSchoolRequest, res: Response) {
   );
   res.status(200).json(updatedSchool);
 }
+
+export async function archiveSchool(req: Request, res: Response) {
+  const archivedSchool = await schoolsService.archiveSchoolService(
+    Number(req.params.id),
+  );
+  res.status(200).json(archivedSchool);
+}
+
+export async function restoreSchool(req: Request, res: Response) {
+  const restoredSchool = await schoolsService.restoreSchoolService(
+    Number(req.params.id),
+  );
+  res.status(200).json(restoredSchool);
+}
