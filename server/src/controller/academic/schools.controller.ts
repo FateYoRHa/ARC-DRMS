@@ -19,3 +19,16 @@ export async function retrieveSchools(req: Request, res: Response) {
   const schoolsList = await schoolsService.retrieveSchoolsService();
   res.status(200).json(schoolsList);
 }
+
+export async function createSchool(req: CreateSchoolRequest, res: Response) {
+  const newSchool = await schoolsService.createSchoolService(req.body);
+  res.status(201).json(newSchool);
+}
+
+export async function updateSchool(req: UpdateSchoolRequest, res: Response) {
+  const updatedSchool = await schoolsService.updateSchoolService(
+    Number(req.params.id),
+    req.body,
+  );
+  res.status(200).json(updatedSchool);
+}
