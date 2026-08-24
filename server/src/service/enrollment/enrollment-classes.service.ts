@@ -17,3 +17,20 @@ export async function retrieveEnrollmentClassesService() {
   return db.select().from(enrollment_classes);
 }
 
+export async function createEnrollmentClass(
+  newEnrollmentClass: NewEnrollmentClass,
+) {
+  return db.insert(enrollment_classes).values(newEnrollmentClass).returning();
+}
+
+export async function updateEnrollmentClassService(
+  id: number,
+  updateEnrollmentClassInput: UpdateEnrollmentClassInput,
+) {
+  return db
+    .update(enrollment_classes)
+    .set(updateEnrollmentClassInput)
+    .where(eq(enrollment_classes.id, id))
+    .returning();
+}
+

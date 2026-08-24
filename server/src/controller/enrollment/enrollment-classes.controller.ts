@@ -27,3 +27,23 @@ export async function retrieveEnrollmentClasses(req: Request, res: Response) {
   res.status(200).json(enrollmentClassesList);
 }
 
+export async function createEnrollmentClass(
+  req: EnrollmentClassRequest,
+  res: Response,
+) {
+  const createdEnrollmentClass =
+    await enrollmentClassesService.createEnrollmentClass(req.body);
+  res.status(201).json(createdEnrollmentClass);
+}
+
+export async function updateEnrollmentClass(
+  req: UpdateEnrollmentClassRequest,
+  res: Response,
+) {
+  const updatedEnrollmentClass =
+    await enrollmentClassesService.updateEnrollmentClassService(
+      Number(req.params.id),
+      req.body,
+    );
+  res.status(200).json(updatedEnrollmentClass);
+}
