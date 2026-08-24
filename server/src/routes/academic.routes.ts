@@ -33,5 +33,13 @@ router.put(
   "/curriculum-subjects/:id",
   curriculumSubjectsRoutes.updateCurriculumSubject,
 );
+router.patch(
+  "/curriculum-subjects/:id/archive",
+  curriculumSubjectsRoutes.archiveCurriculumSubject,
+);
+router.patch(
+  "/curriculum-subjects/:id/restore",
+  curriculumSubjectsRoutes.restoreCurriculumSubject,
+);
 
 export default router;

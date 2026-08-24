@@ -17,10 +17,7 @@ type UpdateCurriculumSubjectRequest = Request<
   UpdateCurriculumSubjectInput
 >;
 
-export async function retrieveCurriculumSubjects(
-  req: Request,
-  res: Response,
-) {
+export async function retrieveCurriculumSubjects(req: Request, res: Response) {
   const { id } = req.params;
   const curriculum_subjects =
     await curriculumSubjectsService.retrieveCurriculumSubjectsService(
@@ -49,4 +46,18 @@ export async function updateCurriculumSubject(
       req.body,
     );
   res.status(200).json(updatedCurriculumSubject);
+}
+
+export async function archiveCurriculumSubject(req: Request, res: Response) {
+  const { id } = req.params;
+  const archivedCurriculumSubject =
+    await curriculumSubjectsService.archiveCurriculumSubjectService(Number(id));
+  res.status(200).json(archivedCurriculumSubject);
+}
+
+export async function restoreCurriculumSubject(req: Request, res: Response) {
+  const { id } = req.params;
+  const restoredCurriculumSubject =
+    await curriculumSubjectsService.restoreCurriculumSubjectService(Number(id));
+  res.status(200).json(restoredCurriculumSubject);
 }
