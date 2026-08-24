@@ -1,4 +1,7 @@
-import { NewCurriculumSubject } from "../../validators/api/curriculum_subjects.validator";
+import type {
+  NewCurriculumSubject,
+  UpdateCurriculumSubjectInput,
+} from "../../validators/api/curriculum_subjects.validator";
 import { db } from "../../database/db";
 import { curriculum_subjects } from "../../database/schema";
 import { eq } from "drizzle-orm";
@@ -20,3 +23,14 @@ export async function addCurriculumSubjectService(
   return await db.insert(curriculum_subjects).values(curriculum_subject);
 }
 
+export async function updateCurriculumSubjectService(
+  id: number,
+  curriculum_subject: UpdateCurriculumSubjectInput,
+) {
+  // Implementation for updating a curriculum subject goes here
+  // This function should take an id and a subject object, and update the corresponding record in the database or any other source
+  return await db
+    .update(curriculum_subjects)
+    .set(curriculum_subject)
+    .where(eq(curriculum_subjects.id, id));
+}

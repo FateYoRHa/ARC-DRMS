@@ -29,5 +29,9 @@ router.post(
   "/curriculum-subjects",
   curriculumSubjectsRoutes.addCurriculumSubjectController,
 );
+router.put(
+  "/curriculum-subjects/:id",
+  curriculumSubjectsRoutes.updateCurriculumSubjectController,
+);
 
 export default router;
