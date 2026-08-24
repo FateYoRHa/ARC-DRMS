@@ -21,27 +21,22 @@ const createCurriculumSubjectFieldSchema = {
   semester: z.enum(semester.enumValues, {
     message: "Invalid semester.",
   }),
-  isActive: z.boolean({ message: "isActive must be a boolean." }).optional(),
-  isRequired: z
-    .boolean({ message: "isRequired must be a boolean." })
-    .optional(),
 };
 
 const updateCurriculumSubjectFieldSchema = {
-  name: createCurriculumSubjectFieldSchema.name.optional(),
-  curriculum_id: createCurriculumSubjectFieldSchema.curriculum_id.optional(),
-  subject_id: createCurriculumSubjectFieldSchema.subject_id.optional(),
-  year_level: createCurriculumSubjectFieldSchema.year_level.optional(),
-  semester: createCurriculumSubjectFieldSchema.semester.optional(),
-  isActive: z.boolean({ message: "isActive must be a boolean." }).optional(),
-  isRequired: z
-    .boolean({ message: "isRequired must be a boolean." })
-    .optional(),
+  name: createCurriculumSubjectFieldSchema.name,
+  curriculum_id: createCurriculumSubjectFieldSchema.curriculum_id,
+  subject_id: createCurriculumSubjectFieldSchema.subject_id,
+  year_level: createCurriculumSubjectFieldSchema.year_level,
+  semester: createCurriculumSubjectFieldSchema.semester,
+  isRequired: z.boolean({ message: "isRequired must be a boolean." }),
 };
 
 export const newCurriculumSubjectSchema = curriculumSubjectsInsertSchema
   .omit({
     id: true,
+    isActive: true,
+    isRequired: true,
     createdAt: true,
     updatedAt: true,
   })
@@ -50,6 +45,8 @@ export const newCurriculumSubjectSchema = curriculumSubjectsInsertSchema
 export const updateCurriculumSubjectSchema = curriculumSubjectsUpdateSchema
   .omit({
     id: true,
+    isActive: true,
+    isRequired: true,
     createdAt: true,
     updatedAt: true,
   })
