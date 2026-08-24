@@ -2,6 +2,7 @@ import express from "express";
 import * as programRoutes from "../controller/academic/programs.controller";
 import * as schoolRoutes from "../controller/academic/schools.controller";
 
+import * as curriculumSubjectsRoutes from "../controller/academic/curriculum_subjects.controller";
 const router = express.Router();
 // Program Routes
 router.get("/programs", programRoutes.retrieveAllPrograms);
@@ -18,5 +19,15 @@ router.post("/schools", schoolRoutes.createSchool);
 router.put("/schools/:id", schoolRoutes.updateSchool);
 router.patch("/schools/:id", schoolRoutes.archiveSchool);
 router.patch("/schools/:id", schoolRoutes.restoreSchool);
+
+// Curriculum Subject Routes
+router.get(
+  "/curriculum-subjects/:id",
+  curriculumSubjectsRoutes.retrieveCurriculumSubjectsController,
+);
+router.post(
+  "/curriculum-subjects",
+  curriculumSubjectsRoutes.addCurriculumSubjectController,
+);
 
 export default router;
