@@ -6,12 +6,12 @@ import {
   timestamp,
   boolean,
 } from "drizzle-orm/pg-core";
-import { school_years, curriculum_programs } from "../../schema";
+import { school_years, curriculum_subjects } from "../../schema";
 import { year_level } from "../enums";
 export const sections = pgTable("sections", {
   id: serial("id").primaryKey(),
   program_id: integer("program_id")
-    .references(() => curriculum_programs.id)
+    .references(() => curriculum_subjects.id)
     .notNull(),
   school_year_id: integer("school_year_id")
     .references(() => school_years.id)

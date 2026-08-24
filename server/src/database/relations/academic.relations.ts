@@ -7,7 +7,7 @@ import {
   school_years,
   subjects,
 } from "../schema";
-import { curriculum_programs } from "../schema/academic/curriculum_programs";
+import { curriculum_subjects } from "../schema/academic/curriculum_subjects";
 
 export const programsRelations = relations(programs, ({ one, many }) => ({
   program_school: one(schools, {
@@ -30,7 +30,7 @@ export const curriculumRelations = relations(curriculums, ({ one, many }) => ({
     fields: [curriculums.school_id],
     references: [schools.id],
   }),
-  curriculum_programs: many(curriculum_programs),
+  curriculum: many(curriculum_subjects),// curriculum has many curriculum_subjects
   curriculum_effective_year: one(school_years, {
     fields: [curriculums.effective_school_year_id],
     references: [school_years.id],
