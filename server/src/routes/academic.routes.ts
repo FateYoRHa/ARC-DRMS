@@ -3,7 +3,10 @@ import * as programRoutes from "../controller/academic/programs.controller";
 import * as schoolRoutes from "../controller/academic/schools.controller";
 
 import * as curriculumSubjectsRoutes from "../controller/academic/curriculum_subjects.controller";
+import * as curriculumRoutes from "../controller/academic/curriculums.controller";
+
 const router = express.Router();
+
 // Program Routes
 router.get("/programs", programRoutes.retrieveAllPrograms);
 router.get("/programs/:id", programRoutes.retrieveProgramById);
@@ -41,5 +44,9 @@ router.patch(
   "/curriculum-subjects/:id/restore",
   curriculumSubjectsRoutes.restoreCurriculumSubject,
 );
+
+// Curriculum Routes
+router.get("/curriculums", curriculumRoutes.retrieveAllCurriculums);
+router.get("/curriculums/:id", curriculumRoutes.retrieveCurriculum);
 
 export default router;
