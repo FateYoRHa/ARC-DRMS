@@ -22,18 +22,18 @@ export async function retrieveCurriculumSubjectsController(
   res: Response,
 ) {
   const { id } = req.params;
-  const subjects =
+  const curriculum_subjects =
     await curriculumSubjectsService.retrieveCurriculumSubjectsService(
       Number(id),
     );
-  res.status(200).json(subjects);
+  res.status(200).json(curriculum_subjects);
 }
 
 export async function addCurriculumSubjectController(
   req: CreateCurriculumSubjectRequest,
   res: Response,
 ) {
-  const newSubject =
+  const newCurriculumSubject =
     await curriculumSubjectsService.addCurriculumSubjectService(req.body);
-  res.status(201).json(newSubject);
+  res.status(201).json(newCurriculumSubject);
 }

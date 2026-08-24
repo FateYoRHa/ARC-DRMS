@@ -13,9 +13,10 @@ export async function retrieveCurriculumSubjectsService(id: number) {
 }
 
 export async function addCurriculumSubjectService(
-  subject: NewCurriculumSubject,
+  curriculum_subject: NewCurriculumSubject,
 ) {
   // Implementation for adding a new curriculum subject goes here
   // This function should take a subject object and save it to the database or any other source
-  return await db.insert(curriculum_subjects).values(subject);
+  return await db.insert(curriculum_subjects).values(curriculum_subject);
 }
+
