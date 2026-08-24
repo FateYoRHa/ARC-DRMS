@@ -23,15 +23,15 @@ router.patch("/schools/:id", schoolRoutes.restoreSchool);
 // Curriculum Subject Routes
 router.get(
   "/curriculum-subjects/:id",
-  curriculumSubjectsRoutes.retrieveCurriculumSubjectsController,
+  curriculumSubjectsRoutes.retrieveCurriculumSubjects,
 );
 router.post(
   "/curriculum-subjects",
-  curriculumSubjectsRoutes.addCurriculumSubjectController,
+  curriculumSubjectsRoutes.addCurriculumSubject,
 );
 router.put(
   "/curriculum-subjects/:id",
-  curriculumSubjectsRoutes.updateCurriculumSubjectController,
+  curriculumSubjectsRoutes.updateCurriculumSubject,
 );
 
 export default router;

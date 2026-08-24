@@ -17,7 +17,7 @@ type UpdateCurriculumSubjectRequest = Request<
   UpdateCurriculumSubjectInput
 >;
 
-export async function retrieveCurriculumSubjectsController(
+export async function retrieveCurriculumSubjects(
   req: Request,
   res: Response,
 ) {
@@ -29,7 +29,7 @@ export async function retrieveCurriculumSubjectsController(
   res.status(200).json(curriculum_subjects);
 }
 
-export async function addCurriculumSubjectController(
+export async function addCurriculumSubject(
   req: CreateCurriculumSubjectRequest,
   res: Response,
 ) {
@@ -38,7 +38,7 @@ export async function addCurriculumSubjectController(
   res.status(201).json(newCurriculumSubject);
 }
 
-export async function updateCurriculumSubjectController(
+export async function updateCurriculumSubject(
   req: UpdateCurriculumSubjectRequest,
   res: Response,
 ) {
