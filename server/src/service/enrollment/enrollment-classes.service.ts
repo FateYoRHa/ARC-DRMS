@@ -6,13 +6,14 @@ import type {
   UpdateEnrollmentClassInput,
 } from "../../validators/api/enrollment-classes.validator";
 
-export async function retrieveEnrollmentClass(id: number) {
+export async function retrieveEnrollmentClassService(id: number) {
   return db
     .select()
     .from(enrollment_classes)
     .where(eq(enrollment_classes.id, id));
 }
 
-export async function retrieveEnrollmentClasses() {
+export async function retrieveEnrollmentClassesService() {
   return db.select().from(enrollment_classes);
 }
+

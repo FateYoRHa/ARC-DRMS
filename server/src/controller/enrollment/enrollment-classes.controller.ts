@@ -15,7 +15,7 @@ type UpdateEnrollmentClassRequest = Request<
 
 export async function retrieveEnrollmentClass(req: Request, res: Response) {
   const enrollmentClass =
-    await enrollmentClassesService.retrieveEnrollmentClass(
+    await enrollmentClassesService.retrieveEnrollmentClassService(
       Number(req.params.id),
     );
   res.status(200).json(enrollmentClass);
@@ -23,6 +23,7 @@ export async function retrieveEnrollmentClass(req: Request, res: Response) {
 
 export async function retrieveEnrollmentClasses(req: Request, res: Response) {
   const enrollmentClassesList =
-    await enrollmentClassesService.retrieveEnrollmentClasses();
+    await enrollmentClassesService.retrieveEnrollmentClassesService();
   res.status(200).json(enrollmentClassesList);
 }
+
