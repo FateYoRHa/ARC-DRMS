@@ -34,3 +34,9 @@ export async function updateEnrollmentClassService(
     .returning();
 }
 
+export async function deleteEnrollmentClassService(id: number) {
+  return db
+    .delete(enrollment_classes)
+    .where(eq(enrollment_classes.id, id))
+    .returning();
+}

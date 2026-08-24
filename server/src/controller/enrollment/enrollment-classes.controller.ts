@@ -47,3 +47,11 @@ export async function updateEnrollmentClass(
     );
   res.status(200).json(updatedEnrollmentClass);
 }
+
+export async function deleteEnrollmentClass(req: Request, res: Response) {
+  const deletedEnrollmentClass =
+    await enrollmentClassesService.deleteEnrollmentClassService(
+      Number(req.params.id),
+    );
+  res.status(200).json(deletedEnrollmentClass);
+}
