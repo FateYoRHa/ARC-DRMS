@@ -10,7 +10,7 @@ import {
   timestamp,
 } from "drizzle-orm/pg-core";
 
-export const curriculum_programs = pgTable("curriculum_programs", {
+export const curriculum_subjects = pgTable("curriculum_subjects", {
   id: serial("id").primaryKey(),
   name: varchar("name").notNull(),
   curriculum_id: integer("curriculum_id")
@@ -27,4 +27,4 @@ export const curriculum_programs = pgTable("curriculum_programs", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
-export type CurriculumProgram = typeof curriculum_programs.$inferSelect;
+export type CurriculumSubject = typeof curriculum_subjects.$inferSelect;

@@ -8,11 +8,16 @@ import {
 } from "drizzle-orm/pg-core";
 import { school_years } from "./school_years";
 import { schools } from "./schools";
+import { programs } from "./programs";
 
 export const curriculums = pgTable("curriculums", {
   id: serial("id").primaryKey(),
-  program_id: integer("program_id").notNull(),
-  school_id: integer("school_id").references(() => schools.id).notNull(),
+  program_id: integer("program_id")
+    .references(() => programs.id)
+    .notNull(),
+  school_id: integer("school_id")
+    .references(() => schools.id)
+    .notNull(),
   name: varchar("name").notNull(),
   effective_school_year_id: integer("effective_school_year_id")
     .references(() => school_years.id)
